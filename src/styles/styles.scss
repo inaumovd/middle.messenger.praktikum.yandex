@@ -1,0 +1,76 @@
+//Partials
+@import '../partials/header/header.css';
+@import '../partials/input/input.scss';
+@import '../partials/button/button.scss';
+@import '../partials/linkButton/linkButton.scss';
+@import '../partials/chatSidebar/chatSidebar.scss';
+@import '../partials/searchInput/searchInput.scss';
+@import '../partials/chatItem/chatItem.scss';
+@import '../partials/chatMain/chatMain.scss';
+@import '../partials/addFileButton/addFileButton.scss';
+@import '../partials/sendMessageInput/sendMessageInput.scss';
+@import '../partials/roundedButton/roundedButton.scss';
+@import '../partials/chatMainHeader/chatMainHeader.scss';
+@import '../partials/chatMessages/chatMessages.scss';
+@import '../partials/dottedButton/dottedButton.scss';
+@import '../partials/backBar/backBar.scss';
+@import '../partials/settingsItem/settingsItem.scss';
+
+// Pages
+@import '../pages/login/login.scss';
+@import '../pages/register/register.scss';
+@import '../pages/chat/chat.scss';
+@import '../pages/settings/settings.scss';
+@import '../pages/404/404.scss';
+
+.auth-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 30px 30px 30px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  min-width: 340px;
+  box-sizing: border-box;
+}
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.auth-header {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+  color: #1E1E1E;
+  margin-bottom: 40px;
+}
+
+main {
+  height: 100vh;
+}
+
+body {
+  display: block;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../asserts/fonts/Inter-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../asserts/fonts/Inter-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}

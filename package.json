@@ -1,0 +1,25 @@
+{
+  "name": "ya-chat",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.hbs",
+  "engines": {
+    "node": "15.x"
+  },
+  "scripts": {
+    "start": "parcel build src/index.hbs & node server.js",
+    "build": "parcel build",
+    "dev": "parcel src/index.hbs --no-cache"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "@parcel/transformer-sass": "^2.8.0",
+    "parcel": "^2.8.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

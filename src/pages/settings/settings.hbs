@@ -1,0 +1,38 @@
+{{!< layout}}
+
+<main class="main">
+    <div class="settings settings_container">
+        {{> "backBar/backBar"}}
+
+        <div class="settings_main-wrapper">
+            <div class="settings_user-info">
+                <div class="settings_userpic-container">
+                    <!--                <img  alt="">-->
+                </div>
+                <span class="settings_name">
+                    Иван
+                </span>
+            </div>
+
+            <div class="settings_items-wrapper">
+                {{> "settingsItem/settingsItem"}}
+                {{> "settingsItem/settingsItem"}}
+                {{> "settingsItem/settingsItem"}}
+                {{> "settingsItem/settingsItem"}}
+                {{> "settingsItem/settingsItem"}}
+                {{> "settingsItem/settingsItem"}}
+            </div>
+
+            <div class="settings_links-wrapper">
+                <div class="settings_link-wrapper">
+                    {{> "linkButton/linkButton"}}
+                </div>
+                <div class="settings_link-wrapper">
+                    {{> "linkButton/linkButton"}}
+                </div>
+                {{> "linkButton/linkButton"}}
+            </div>
+
+        </div>
+    </div>
+</main>

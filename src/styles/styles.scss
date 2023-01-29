@@ -1,28 +1,3 @@
-//Partials
-@import '../partials/header/header.css';
-@import '../partials/input/input.scss';
-@import '../partials/button/button.scss';
-@import '../partials/linkButton/linkButton.scss';
-@import '../partials/chatSidebar/chatSidebar.scss';
-@import '../partials/searchInput/searchInput.scss';
-@import '../partials/chatItem/chatItem.scss';
-@import '../partials/chatMain/chatMain.scss';
-@import '../partials/addFileButton/addFileButton.scss';
-@import '../partials/sendMessageInput/sendMessageInput.scss';
-@import '../partials/roundedButton/roundedButton.scss';
-@import '../partials/chatMainHeader/chatMainHeader.scss';
-@import '../partials/chatMessages/chatMessages.scss';
-@import '../partials/dottedButton/dottedButton.scss';
-@import '../partials/backBar/backBar.scss';
-@import '../partials/settingsItem/settingsItem.scss';
-
-// Pages
-@import '../pages/login/login.scss';
-@import '../pages/register/register.scss';
-@import '../pages/chat/chat.scss';
-@import '../pages/settings/settings.scss';
-@import '../pages/404/404.scss';
-
 .auth-form-container {
   display: flex;
   flex-direction: column;

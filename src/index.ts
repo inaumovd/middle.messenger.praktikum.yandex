@@ -96,5 +96,5 @@ const getPage = () => {
 const Page = getPage()
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderDOM(new LoginPage())
+  renderDOM(new RegisterPage())
 })

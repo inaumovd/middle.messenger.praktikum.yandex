@@ -11,7 +11,7 @@ class Error extends Block<ErrorProps> {
 
   protected render(): string {
     return `
-      <div>{{#if text}}{{text}}{{/if}}</div>
+      <div class='input-error'>{{#if text}}{{text}}{{/if}}</div>
 	  `
   }
 }

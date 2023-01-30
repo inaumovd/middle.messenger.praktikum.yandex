@@ -1,5 +1,4 @@
-import Block from '../../core/Block'
-import template from 'bundle-text:./linkButton.hbs'
+import Block from 'core/Block'
 
 import './linkButton.scss'
 
@@ -15,7 +14,8 @@ class LinkButton extends Block {
   }
 
   protected render(): string {
-    return template
+    // language=hbs
+    return `<a class="link-button">{{text}}</a>`
   }
 }
 

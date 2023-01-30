@@ -15,15 +15,50 @@ interface ControlledInputProps {
 
 class ControlledInput extends Block {
   static componentName = 'ControlledInput'
-  constructor({ ...props }: ControlledInputProps) {
+  constructor({ type, name, ...props }: ControlledInputProps) {
     super({
       ...props,
+      name,
+      type,
       onBlur: (e: FocusEvent) => {
         const inputEl = e.target as HTMLInputElement
+        let error = ''
 
-        const error = validateForm([
-          { type: ValidateRuleType.Email, value: inputEl.value },
-        ])
+        if (name === 'email') {
+          error = validateForm([
+            { type: ValidateRuleType.Email, value: inputEl.value },
+          ])
+        }
+
+        if (name === 'password') {
+          error = validateForm([
+            { type: ValidateRuleType.Password, value: inputEl.value },
+          ])
+        }
+
+        if (name === 'passwordConfirm') {
+          error = validateForm([
+            { type: ValidateRuleType.Password, value: inputEl.value },
+          ])
+        }
+
+        if (name === 'firstName' || name === 'lastName') {
+          error = validateForm([
+            { type: ValidateRuleType.Name, value: inputEl.value },
+          ])
+        }
+
+        if (name === 'phone') {
+          error = validateForm([
+            { type: ValidateRuleType.Phone, value: inputEl.value },
+          ])
+        }
+
+        if (name === 'login') {
+          error = validateForm([
+            { type: ValidateRuleType.Login, value: inputEl.value },
+          ])
+        }
 
         this.refs.errorRef.setProps({
           text: error,

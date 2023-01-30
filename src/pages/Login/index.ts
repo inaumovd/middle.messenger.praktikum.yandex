@@ -9,17 +9,39 @@ class LoginPage extends Block {
 
     this.setProps({
       onSubmit: () => this.onSubmit(),
-      onInput: (e: HTMLInputElement) => this.onInput(e),
+      onInput: (e: InputEvent) => this.onInput(e),
       onBlur: () => this.onBlur(),
-      onFocus: () => this.onFocus(),
+      onFocus: (e: FocusEvent) => this.onFocus(e),
       errorMessage: '',
       emailValue: '',
       passwordValue: '',
     })
   }
 
-  onFocus() {
-    console.log('focus')
+  onFocus(e: FocusEvent) {
+    const inputEl = e.target as HTMLInputElement
+
+    let errorMessage = ''
+
+    if (inputEl.type === 'email') {
+      errorMessage = validateForm([
+        { type: ValidateRuleType.Email, value: inputEl.value },
+      ])
+
+      this.refs.emailInputRef.refs.errorRef.setProps({
+        text: errorMessage,
+      })
+    }
+
+    if (inputEl.type === 'password') {
+      errorMessage = validateForm([
+        { type: ValidateRuleType.Password, value: inputEl.value },
+      ])
+
+      this.refs.passwordInputRef.refs.errorRef.setProps({
+        text: errorMessage,
+      })
+    }
   }
 
   onSubmit() {
@@ -44,12 +66,18 @@ class LoginPage extends Block {
   onInput(e: InputEvent) {
     const inputEl = e.target as HTMLInputElement
 
-    const error = validateForm([
-      { type: ValidateRuleType.Email, value: inputEl.value },
-    ])
+    // const error = validateForm([
+    //   { type: ValidateRuleType.Email, value: inputEl.value },
+    // ])
+
+    console.log(inputEl.value)
 
     this.refs.emailInputRef.refs.errorRef.setProps({
-      text: error,
+      text: '',
+    })
+
+    this.refs.passwordInputRef.refs.errorRef.setProps({
+      text: '',
     })
   }
 
@@ -69,7 +97,7 @@ class LoginPage extends Block {
                 {{{ControlledInput
                   name="email"
                   placeholder="Email"
-                  type="text"
+                  type="email"
                   onInput=onInput
                   onFocus=onFocus
                   ref="emailInputRef"
@@ -94,7 +122,7 @@ class LoginPage extends Block {
               {{{Button onClick=onSubmit text="Авторизоваться"}}}
             </div>
 
-            {{{LinkButton}}}
+            {{{LinkButton }}}
           </div>
         </div>
       </main>

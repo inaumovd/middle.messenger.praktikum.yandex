@@ -17,7 +17,7 @@ class Input extends Block {
     onInput,
     onBlur,
     onFocus,
-    type = 'text',
+    type,
     placeholder,
     name,
   }: InputProps) {

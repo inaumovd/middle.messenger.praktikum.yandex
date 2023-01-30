@@ -99,7 +99,7 @@ export function validateForm(rules: ValidateRule[]): string {
       // Общие требования
       const isValid = /^[A-ZА-Я][\p{L}-]+$/.test(value)
       if (!isValid) {
-        errorMessage = 'Телефон не соответствует требованиям'
+        errorMessage = 'Имя не соответствует требованиям'
         return
       }
 

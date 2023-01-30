@@ -3,4 +3,9 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 11px;
+  cursor: pointer;
+
+  &_red {
+    color: tomato;
+  }
 }

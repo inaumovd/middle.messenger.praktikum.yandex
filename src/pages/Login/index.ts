@@ -10,7 +10,6 @@ class LoginPage extends Block {
     this.setProps({
       onSubmit: () => this.onSubmit(),
       onInput: (e: InputEvent) => this.onInput(e),
-      onBlur: () => this.onBlur(),
       onFocus: (e: FocusEvent) => this.onFocus(e),
       errorMessage: '',
       emailValue: '',
@@ -79,10 +78,6 @@ class LoginPage extends Block {
     this.refs.passwordInputRef.refs.errorRef.setProps({
       text: '',
     })
-  }
-
-  onBlur() {
-    console.log('blus')
   }
 
   render() {

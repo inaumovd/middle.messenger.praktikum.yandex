@@ -11,7 +11,6 @@ import SendMessageInput from './SendMessageInput'
 import BackBar from './BackBar'
 import Input from './Input'
 import LinkButton from './LinkButton'
-import SettingsItem from './SettingsItem'
 import Button from './Button'
 import Error from './Error'
 import ControlledInput from './ControlledInput'
@@ -30,7 +29,6 @@ export {
   BackBar,
   Input,
   LinkButton,
-  SettingsItem,
   Button,
   Error,
   ControlledInput,

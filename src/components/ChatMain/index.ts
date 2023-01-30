@@ -1,27 +1,42 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 
 import './chatMain.scss'
 
-interface ChatMainProps {
-  text?: string
-  onClick?: () => void
-}
-
 class ChatMain extends Block {
   static componentName = 'ChatMain'
-  constructor({ text, onClick }: ChatMainProps) {
-    super({ text, events: { click: onClick } })
+  constructor() {
+    super()
+
+    this.setProps({
+      onSubmit: () => this.onSubmit(),
+    })
+  }
+
+  onSubmit() {
+    const messageInputEl =
+      this.refs.messageInputRef.getContent() as HTMLInputElement
+
+    if (messageInputEl.value) {
+      console.log('send message request ->', messageInputEl.value)
+    }
   }
 
   protected render(): string {
+    // language=hbs
     return `
 			<div class="chat-main">
     		{{{ChatMainHeader}}}
     		{{{ChatMessages}}}
     		<div class="chat-main_footer">
         	{{{AddFileButton}}}
-        	{{{SendMessageInput}}}
-        	{{{RoundedButton}}}
+        	{{{SendMessageInput
+            name='message'
+            onInput=onInput
+            ref="messageInputRef"
+          }}}
+        	{{{RoundedButton
+            onClick=onSubmit
+          }}}
     		</div>
 			</div>
 		`

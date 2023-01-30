@@ -4,18 +4,19 @@ import './linkButton.scss'
 
 interface LinkButtonProps {
   text?: string
+  isRed?: boolean
   onClick?: () => void
 }
 
 class LinkButton extends Block {
   static componentName = 'LinkButton'
-  constructor({ text, onClick }: LinkButtonProps) {
-    super({ text, events: { click: onClick } })
+  constructor({ text, isRed, onClick }: LinkButtonProps) {
+    super({ text, isRed, events: { click: onClick } })
   }
 
   protected render(): string {
     // language=hbs
-    return `<a class="link-button">{{text}}</a>`
+    return `<a class='{{#if isRed}}link-button_red{{/if}} link-button'>{{text}}</a>`
   }
 }
 

@@ -16,7 +16,6 @@ import {
   BackBar,
   Input,
   LinkButton,
-  SettingsItem,
   Button,
   Error,
   ControlledInput,
@@ -33,7 +32,6 @@ import {
 } from './pages'
 
 registerComponent(LinkButton)
-registerComponent(SettingsItem)
 registerComponent(BackBar)
 registerComponent(ChatSidebar)
 registerComponent(ChatItem)

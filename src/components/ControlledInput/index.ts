@@ -68,6 +68,7 @@ class ControlledInput extends Block {
   }
 
   protected render(): string {
+    // language=hbs
     return `
      <div class="input-container">
       {{{Input

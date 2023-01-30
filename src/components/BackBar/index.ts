@@ -8,6 +8,7 @@ interface BackBarProps {
 }
 
 class BackBar extends Block {
+  static componentName = 'BackBar'
   constructor({ text, onClick }: BackBarProps) {
     super({ text, events: { click: onClick } })
   }

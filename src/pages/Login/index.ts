@@ -1,7 +1,7 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
+import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 
 import './login.scss'
-import { validateForm, ValidateRuleType } from '../../helpers/validateForm'
 
 class LoginPage extends Block {
   constructor() {
@@ -9,71 +9,52 @@ class LoginPage extends Block {
 
     this.setProps({
       onSubmit: () => this.onSubmit(),
-      onChange: () => this.onChange(),
+      onInput: (e: HTMLInputElement) => this.onInput(e),
       onBlur: () => this.onBlur(),
+      onFocus: () => this.onFocus(),
       errorMessage: '',
       emailValue: '',
       passwordValue: '',
     })
   }
 
+  onFocus() {
+    console.log('focus')
+  }
+
   onSubmit() {
-    const emailEl = this._element?.querySelector(
-      'input[name="email"]',
-    ) as HTMLInputElement
-    const passwordEl = this._element?.querySelector(
-      'input[name="password"]',
-    ) as HTMLInputElement
+    const emailEl = this.refs.emailInputRef
+      .getContent()
+      .querySelector('input[name="email"]') as HTMLInputElement
+
+    const passwordEl = this.refs.passwordInputRef
+      .getContent()
+      .querySelector('input[name="password"]') as HTMLInputElement
 
     const errorMessage = validateForm([
       { type: ValidateRuleType.Email, value: emailEl.value },
       { type: ValidateRuleType.Password, value: passwordEl.value },
     ])
 
-    this.setProps({
-      errorMessage,
-      emailValue: emailEl.value,
-      passwordValue: passwordEl.value,
-    })
-
     if (!errorMessage) {
-      console.log('send request')
+      console.log('send request', emailEl.value, passwordEl.value)
     }
   }
 
-  onChange() {
-    const emailEl = this._element?.querySelector(
-      'input[name="email"]',
-    ) as HTMLInputElement
-    const passwordEl = this._element?.querySelector(
-      'input[name="password"]',
-    ) as HTMLInputElement
+  onInput(e: InputEvent) {
+    const inputEl = e.target as HTMLInputElement
 
-    this.setProps({
-      errorMessage: '',
-      emailValue: emailEl.value,
-      passwordValue: passwordEl.value,
+    const error = validateForm([
+      { type: ValidateRuleType.Email, value: inputEl.value },
+    ])
+
+    this.refs.emailInputRef.refs.errorRef.setProps({
+      text: error,
     })
   }
 
   onBlur() {
-    const emailEl = this._element?.querySelector(
-      'input[name="email"]',
-    ) as HTMLInputElement
-    const passwordEl = this._element?.querySelector(
-      'input[name="password"]',
-    ) as HTMLInputElement
-
-    const errorMessage = validateForm([
-      { type: ValidateRuleType.Email, value: emailEl.value },
-      { type: ValidateRuleType.Password, value: passwordEl.value },
-    ])
-
-    this.setProps({
-      errorMessage,
-      emailValue: emailEl.value,
-      passwordValue: passwordEl.value,
-    })
+    console.log('blus')
   }
 
   render() {
@@ -85,26 +66,24 @@ class LoginPage extends Block {
             <h1 class="auth-header">Вход</h1>
             <div class="inputs-container">
               <div class="input-wrapper">
-                {{{Input
+                {{{ControlledInput
                   name="email"
-                  label="Email"
                   placeholder="Email"
                   type="text"
-                  onChange=onChange
-                  onBlur=onBlur
-                  value="${this.props.emailValue}"
+                  onInput=onInput
+                  onFocus=onFocus
+                  ref="emailInputRef"
                 }}}
               </div>
 
               <div class="input-wrapper">
-                {{{Input
+                {{{ControlledInput
                   name="password"
-                  label="Пароль"
                   placeholder="Пароль"
                   type="password"
-                  onChange=onChange
-                  onBlur=onBlur
-                  value="${this.props.passwordValue}"
+                  onInput=onInput
+                  onFocus=onFocus
+                  ref="passwordInputRef"
                 }}}
               </div>
             </div>

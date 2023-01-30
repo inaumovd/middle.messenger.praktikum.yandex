@@ -4,18 +4,19 @@ import template from 'bundle-text:./roundedButton.hbs'
 import './roundedButton.scss'
 
 interface RoundedButtonProps {
-	text?: string
-	onClick?: () => void
+  text?: string
+  onClick?: () => void
 }
 
 class RoundedButton extends Block {
-	constructor({ text, onClick }: RoundedButtonProps) {
-		super({ text, events: { click: onClick } })
-	}
+  static componentName = 'RoundedButton'
+  constructor({ text, onClick }: RoundedButtonProps) {
+    super({ text, events: { click: onClick } })
+  }
 
-	protected render(): string {
-		return template
-	}
+  protected render(): string {
+    return template
+  }
 }
 
 export default RoundedButton

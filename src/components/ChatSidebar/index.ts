@@ -8,6 +8,7 @@ interface ChatSidebarProps {
 }
 
 class ChatSidebar extends Block {
+  static componentName = 'ChatSidebar'
   constructor({ text, onClick }: ChatSidebarProps) {
     super({ text, events: { click: onClick } })
   }

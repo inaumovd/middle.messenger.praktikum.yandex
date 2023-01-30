@@ -9,6 +9,7 @@ interface ChatMessagesProps {
 }
 
 class ChatMessages extends Block {
+  static componentName = 'ChatMessages'
   constructor({ text, onClick }: ChatMessagesProps) {
     super({ text, events: { click: onClick } })
   }

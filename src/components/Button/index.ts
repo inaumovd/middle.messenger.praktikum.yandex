@@ -8,12 +8,13 @@ interface ButtonProps {
 }
 
 class Button extends Block {
+  static componentName = 'Button'
   constructor({ text, onClick }: ButtonProps) {
     super({ text, events: { click: onClick } })
   }
 
   protected render(): string {
-	  // language=hbs
+    // language=hbs
     return `
 			<button class="button" type="submit">{{text}}</button>
 		`

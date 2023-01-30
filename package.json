@@ -4,9 +4,15 @@
   "description": "",
   "source": "src/index.html",
   "scripts": {
-    "start": "parcel build src/index.hbs & node server.js",
+    "start": "parcel build src/index.html & node server.js",
     "build": "parcel build",
     "dev": "parcel src/index.html --no-source-maps --no-cache"
+  },
+  "alias": {
+    "core": "./src/core",
+    "components": "./src/components",
+    "pages": "./src/pages",
+    "helpers": "./src/helpers"
   },
   "keywords": [],
   "author": "",

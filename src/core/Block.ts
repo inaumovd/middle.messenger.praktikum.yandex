@@ -16,17 +16,19 @@ export default class Block<P = any> {
     FLOW_RENDER: 'flow:render',
   } as const
 
+  static componentName: string
+
   public id = nanoid(6)
   private readonly _meta: BlockMeta
 
   protected _element: Nullable<HTMLElement> = null
-  protected readonly props: P
+  readonly props: P
   protected children: { [id: string]: Block } = {}
 
   eventBus: () => EventBus<Events>
 
   protected state: any = {}
-  protected refs: { [key: string]: HTMLElement } = {}
+  protected refs: { [key: string]: Block } = {}
 
   public constructor(props?: P) {
     const eventBus = new EventBus<Events>()

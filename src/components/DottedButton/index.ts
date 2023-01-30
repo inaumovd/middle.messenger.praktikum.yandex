@@ -9,6 +9,7 @@ interface DottedButtonProps {
 }
 
 class DottedButton extends Block {
+  static componentName = 'DottedButton'
   constructor({ text, onClick }: DottedButtonProps) {
     super({ text, events: { click: onClick } })
   }

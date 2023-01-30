@@ -4,18 +4,19 @@ import template from 'bundle-text:./sendMessageInput.hbs'
 import './sendMessageInput.scss'
 
 interface SendMessageInputProps {
-	text?: string
-	onClick?: () => void
+  text?: string
+  onClick?: () => void
 }
 
-class  SendMessageInput extends Block {
-	constructor({ text, onClick }: SendMessageInputProps) {
-		super({ text, events: { click: onClick } })
-	}
+class SendMessageInput extends Block {
+  static componentName = 'SendMessageInput'
+  constructor({ text, onClick }: SendMessageInputProps) {
+    super({ text, events: { click: onClick } })
+  }
 
-	protected render(): string {
-		return template
-	}
+  protected render(): string {
+    return template
+  }
 }
 
-export default  SendMessageInput
+export default SendMessageInput

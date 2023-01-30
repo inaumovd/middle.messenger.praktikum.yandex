@@ -9,6 +9,7 @@ interface SettingsItemProps {
 }
 
 class SettingsItem extends Block {
+  static componentName = 'SettingsItem'
   constructor({ text, onClick }: SettingsItemProps) {
     super({ text, events: { click: onClick } })
   }

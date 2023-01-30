@@ -8,6 +8,7 @@ interface ChatMainHeaderProps {
 }
 
 class ChatMainHeader extends Block {
+  static componentName = 'ChatMainHeader'
   constructor({ text, onClick }: ChatMainHeaderProps) {
     super({ text, events: { click: onClick } })
   }

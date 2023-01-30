@@ -8,6 +8,7 @@ interface ChatMainProps {
 }
 
 class ChatMain extends Block {
+  static componentName = 'ChatMain'
   constructor({ text, onClick }: ChatMainProps) {
     super({ text, events: { click: onClick } })
   }

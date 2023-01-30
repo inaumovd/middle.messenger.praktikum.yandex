@@ -18,6 +18,8 @@ import {
   LinkButton,
   SettingsItem,
   Button,
+  Error,
+  ControlledInput,
 } from './components'
 
 import {
@@ -45,41 +47,44 @@ registerComponent(SendMessageInput)
 registerComponent(RoundedButton)
 registerComponent(Input)
 registerComponent(Button)
-
+registerComponent(Error)
+registerComponent(ControlledInput)
 
 // Временный роутер
 const getPage = () => {
-  const currentRoute = (window.location.href.toString().split(window.location.host)[1])
+  const currentRoute = window.location.href
+    .toString()
+    .split(window.location.host)[1]
 
   const routes = [
     {
       path: '/login',
-      page: LoginPage
+      page: LoginPage,
     },
     {
       path: '/register',
-      page: RegisterPage
+      page: RegisterPage,
     },
     {
       path: '/chat',
-      page: ChatPage
+      page: ChatPage,
     },
     {
       path: '/settings',
-      page: SettingsPage
+      page: SettingsPage,
     },
     {
       path: '/404',
-      page: Page404
+      page: Page404,
     },
     {
       path: '/500',
-      page: Page500
+      page: Page500,
     },
   ]
   let currentPage = NavPage
 
-  routes.forEach(route => {
+  routes.forEach((route) => {
     if (route.path === currentRoute) {
       // @ts-ignore
       currentPage = route.page
@@ -91,5 +96,5 @@ const getPage = () => {
 const Page = getPage()
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderDOM(new Page())
+  renderDOM(new LoginPage())
 })

@@ -9,6 +9,7 @@ interface LinkButtonProps {
 }
 
 class LinkButton extends Block {
+  static componentName = 'LinkButton'
   constructor({ text, onClick }: LinkButtonProps) {
     super({ text, events: { click: onClick } })
   }

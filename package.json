@@ -4,9 +4,10 @@
   "description": "",
   "source": "src/index.html",
   "scripts": {
-    "start": "parcel build src/index.html & node server.js",
-    "build": "parcel build",
-    "dev": "parcel src/index.html --no-source-maps --no-cache"
+    "start": "parcel build src/index.html & npm run copy &node server.js",
+    "build": "parcel build && npm run copy",
+    "dev": "parcel src/index.html --no-source-maps --no-cache",
+    "copy": "cp _redirects dist"
   },
   "alias": {
     "core": "./src/core",

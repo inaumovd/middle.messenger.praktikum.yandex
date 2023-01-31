@@ -1,9 +1,6 @@
 {
   "name": "ya-chat",
   "version": "1.0.0",
-  "engines" : {
-    "node" : "18.3.0"
-  },
   "description": "",
   "source": "src/index.html",
   "scripts": {

@@ -7,7 +7,7 @@
     "start": "parcel build src/index.html & npm run copy &node server.js",
     "build": "parcel build && npm run copy",
     "dev": "parcel src/index.html --no-source-maps --no-cache",
-    "copy": "cp _redirects dist"
+    "copy": "cp netlify.toml dist"
   },
   "alias": {
     "core": "./src/core",

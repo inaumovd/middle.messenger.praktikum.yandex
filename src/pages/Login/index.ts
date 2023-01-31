@@ -69,7 +69,7 @@ class LoginPage extends Block {
     //   { type: ValidateRuleType.Email, value: inputEl.value },
     // ])
 
-    console.log(inputEl.value)
+    // console.log(inputEl.value)
 
     this.refs.emailInputRef.refs.errorRef.setProps({
       text: '',

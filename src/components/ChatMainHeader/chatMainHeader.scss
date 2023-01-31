@@ -1,7 +1,7 @@
 .chat-header_userpic-wrapper {
   width: 34px;
   height: 34px;
-  background: #EFEFEF;
+  background: var(--color-background-light);
   border-radius: 30px;
   margin-right: 10px;
 }
@@ -11,7 +11,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 0;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid var(--color-border-grey);
 }
 
 .chat-header_user-info {
@@ -21,5 +21,5 @@
   font-weight: 600;
   font-size: 13px;
   line-height: 13px;
-  color: #1E1E1E;
+  color: var(--color-main-black);
 }

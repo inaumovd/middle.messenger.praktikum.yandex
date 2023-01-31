@@ -12,7 +12,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-top: 1px solid #EAEAEA;
+  border-top: 1px solid var(--color-border-grey);
 }
 
 .chat-main_chat {
@@ -23,7 +23,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 12px;
-  color: #999999;
+  color: var(--color-main-grey);
   margin: 0 auto;
   display: block;
   text-align: center;

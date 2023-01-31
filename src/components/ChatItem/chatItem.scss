@@ -1,6 +1,6 @@
 .chat-list-item {
-  border-top: 1px solid #EAEAEA;
-  border-bottom: 1px solid #EAEAEA;
+  border-top: 1px solid var(--color-border-grey);
+  border-bottom: 1px solid var(--color-border-grey);
   padding: 12px 0;
 }
 
@@ -12,7 +12,7 @@
 .chat-list-item_userpic-container {
   width: 47px;
   height: 47px;
-  background: #EFEFEF;
+  background: var(--color-background-light);
   border-radius: 30px;
   margin-right: 10px;
 }
@@ -26,7 +26,7 @@
   font-weight: 600;
   font-size: 13px;
   line-height: 13px;
-  color: #1E1E1E;
+  color: var(--color-main-text);
   margin-bottom: 4px;
 }
 
@@ -34,7 +34,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  color: #999999;
+  color: var(--color-main-grey);
 }
 
 .chat-list-item_time-wrapper {
@@ -48,14 +48,14 @@
   font-weight: 500;
   font-size: 9px;
   line-height: 13px;
-  color: #999999;
+  color: var(--color-main-grey);
   margin-bottom: 14px;
 }
 
 .chat-list-item-counter {
   width: 20px;
   height: 20px;
-  background: #3369F3;
+  background: var(--color-main-blue);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -64,5 +64,5 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 12px;
-  color: #FFFFFF;
+  color: var(--color-main-white);
 }

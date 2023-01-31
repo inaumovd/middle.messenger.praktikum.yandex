@@ -1,7 +1,7 @@
 .chat-sidebar {
   width: 25%;
-  background: #FBFBFB;
-  border-right: #EAEAEA;
+  background: var(--color-border-light);
+  border-right: var(--color-border-grey);
   display: flex;
   flex-direction: column;
   padding: 21px 10px 0 10px;
@@ -9,7 +9,7 @@
 }
 
 .profile-button {
-  color: #999999;
+  color: var(--color-main-grey);
   font-weight: 500;
   font-size: 12px;
   line-height: 12px;

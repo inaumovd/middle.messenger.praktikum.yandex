@@ -1,9 +1,9 @@
 .button {
-  background: #3369F3;
+  background: var(--color-main-blue);
   border-radius: 8px;
   border: none;
   width: 100%;
-  color: #FFFFFF;
+  color: var(--color-main-white);
   font-weight: 500;
   font-size: 13px;
   line-height: 13px;

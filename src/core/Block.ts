@@ -8,7 +8,7 @@ interface BlockMeta<P = any> {
 
 type Events = Values<typeof Block.EVENTS>
 
-export default class Block<P = any> {
+export default class Block<Props extends Record<string, any> = unknown> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -22,7 +22,7 @@ export default class Block<P = any> {
   private readonly _meta: BlockMeta
 
   protected _element: Nullable<HTMLElement> = null
-  readonly props: P
+  readonly props: Props
   protected children: { [id: string]: Block } = {}
 
   eventBus: () => EventBus<Events>
@@ -30,7 +30,7 @@ export default class Block<P = any> {
   protected state: any = {}
   protected refs: { [key: string]: Block } = {}
 
-  public constructor(props?: P) {
+  public constructor(props?: Props) {
     const eventBus = new EventBus<Events>()
 
     this._meta = {
@@ -39,7 +39,7 @@ export default class Block<P = any> {
 
     this.getStateFromProps(props)
 
-    this.props = this._makePropsProxy(props || ({} as P))
+    this.props = this._makePropsProxy(props || ({} as Props))
     this.state = this._makePropsProxy(this.state)
 
     this.eventBus = () => eventBus

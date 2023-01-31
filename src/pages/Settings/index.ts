@@ -36,17 +36,17 @@ class SettingsPage extends Block {
     const firstNameEl = this.refs.firstNameInputRef
       .getContent()
       .querySelector(
-        'input[name="firstName"]',
+        'input[name="first_name"]',
       ) as HTMLInputElement as HTMLInputElement
     const lastNameEl = this.refs.lastNameInputRef
       .getContent()
       .querySelector(
-        'input[name="lastName"]',
+        'input[name="last_name"]',
       ) as HTMLInputElement as HTMLInputElement
     const displayNameEl = this.refs.displayNameInputRef
       .getContent()
       .querySelector(
-        'input[name="displayName"]',
+        'input[name="display_name"]',
       ) as HTMLInputElement as HTMLInputElement
     const phoneEl = this.refs.phoneInputRef
       .getContent()
@@ -104,7 +104,7 @@ class SettingsPage extends Block {
       })
     }
 
-    if (inputEl.name === 'firstName') {
+    if (inputEl.name === 'first_name') {
       errorMessage = validateForm([
         { type: ValidateRuleType.Name, value: inputEl.value },
       ])
@@ -114,7 +114,7 @@ class SettingsPage extends Block {
       })
     }
 
-    if (inputEl.name === 'lastName') {
+    if (inputEl.name === 'last_name') {
       errorMessage = validateForm([
         { type: ValidateRuleType.Name, value: inputEl.value },
       ])
@@ -154,13 +154,13 @@ class SettingsPage extends Block {
       })
     }
 
-    if (inputEl.name === 'firstName') {
+    if (inputEl.name === 'first_name') {
       this.refs.firstNameInputRef.refs.errorRef.setProps({
         text: '',
       })
     }
 
-    if (inputEl.name === 'lastName') {
+    if (inputEl.name === 'last_name') {
       this.refs.lastNameInputRef.refs.errorRef.setProps({
         text: '',
       })
@@ -209,7 +209,7 @@ class SettingsPage extends Block {
                   ref="loginInputRef"
                 }}}
                 {{{ControlledInput
-                  name="firstName"
+                  name="first_name"
                   placeholder="Имя"
                   type="firstName"
                   onInput=onInput
@@ -217,7 +217,7 @@ class SettingsPage extends Block {
                   ref="firstNameInputRef"
                 }}}
                 {{{ControlledInput
-                  name="lastName"
+                  name="last_name"
                   placeholder="Фамилия"
                   type="lastName"
                   onInput=onInput
@@ -225,7 +225,7 @@ class SettingsPage extends Block {
                   ref="lastNameInputRef"
                 }}}
                 {{{ControlledInput
-                  name="displayName"
+                  name="display_name"
                   placeholder="Имя в чате"
                   type="displayName"
                   onInput=onInput

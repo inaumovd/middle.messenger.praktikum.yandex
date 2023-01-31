@@ -22,11 +22,11 @@ class RegisterPage extends Block {
 
     const firstNameEl = this.refs.firstNameInputRef
       .getContent()
-      .querySelector('input[name="firstName"]') as HTMLInputElement
+      .querySelector('input[name="first_name"]') as HTMLInputElement
 
     const lastNameEl = this.refs.lastNameInputRef
       .getContent()
-      .querySelector('input[name="lastName"]') as HTMLInputElement
+      .querySelector('input[name="second_name"]') as HTMLInputElement
 
     const phoneEl = this.refs.phoneInputRef
       .getContent()
@@ -90,7 +90,7 @@ class RegisterPage extends Block {
 
               <div class="input-wrapper">
                   {{{ControlledInput
-                    name="firstName"
+                    name="first_name"
                     placeholder="Имя"
                     type="firstName"
                     onInput=onInput
@@ -101,7 +101,7 @@ class RegisterPage extends Block {
 
               <div class="input-wrapper">
                   {{{ControlledInput
-                    name="lastName"
+                    name="second_name"
                     placeholder="Фамилия"
                     type="lastName"
                     onInput=onInput

@@ -1,4 +1,6 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
+
+import './navPage.scss'
 
 class NavPage extends Block {
   constructor() {
@@ -16,26 +18,14 @@ class NavPage extends Block {
   render() {
     // language=hbs
     return `
-        <ul>
-            <li>
-                <a href="./login">Login</a>
-            </li>
-            <li>
-                <a href="./register">Register</a>
-            </li>
-            <li>
-                <a href="./chat">Chat</a>
-            </li>
-            <li>
-                <a href="./settings">Settings</a>
-            </li>
-            <li>
-                <a href="./404">404</a>
-            </li>
-            <li>
-                <a href="./500">500</a>
-            </li>
-        </ul>
+      <nav class='main-nav'>
+        <a href="./login">Login</a>
+        <a href="./register">Register</a>
+        <a href="./chat">Chat</a>
+        <a href="./settings">Settings</a>
+        <a href="./404">404</a>
+        <a href="./500">500</a>
+      </nav>
     `
   }
 }

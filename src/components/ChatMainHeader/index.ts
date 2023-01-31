@@ -1,16 +1,11 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 
 import './chatMainHeader.scss'
 
-interface ChatMainHeaderProps {
-  text?: string
-  onClick?: () => void
-}
-
 class ChatMainHeader extends Block {
   static componentName = 'ChatMainHeader'
-  constructor({ text, onClick }: ChatMainHeaderProps) {
-    super({ text, events: { click: onClick } })
+  constructor() {
+    super()
   }
 
   protected render(): string {

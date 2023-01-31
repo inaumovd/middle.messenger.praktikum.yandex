@@ -8,7 +8,7 @@ interface LinkButtonProps {
   onClick?: () => void
 }
 
-class LinkButton extends Block {
+class LinkButton extends Block<LinkButtonProps> {
   static componentName = 'LinkButton'
   constructor({ text, isRed, onClick }: LinkButtonProps) {
     super({ text, isRed, events: { click: onClick } })

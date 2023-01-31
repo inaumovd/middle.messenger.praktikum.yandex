@@ -11,7 +11,7 @@ interface InputProps {
   name?: string
 }
 
-class Input extends Block {
+class Input extends Block<InputProps> {
   static componentName = 'Input'
   constructor({
     onInput,

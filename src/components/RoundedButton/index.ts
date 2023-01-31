@@ -1,4 +1,4 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 import template from 'bundle-text:./roundedButton.hbs'
 
 import './roundedButton.scss'
@@ -8,7 +8,7 @@ interface RoundedButtonProps {
   onClick?: () => void
 }
 
-class RoundedButton extends Block {
+class RoundedButton extends Block<RoundedButtonProps> {
   static componentName = 'RoundedButton'
   constructor({ text, onClick }: RoundedButtonProps) {
     super({ text, events: { click: onClick } })

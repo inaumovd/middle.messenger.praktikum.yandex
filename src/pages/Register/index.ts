@@ -1,6 +1,7 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 
 import './register.scss'
+
 class RegisterPage extends Block {
   constructor() {
     super()

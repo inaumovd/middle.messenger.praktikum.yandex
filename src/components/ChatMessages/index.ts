@@ -1,17 +1,12 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 import template from 'bundle-text:./chatMessages.hbs'
 
 import './chatMessages.scss'
 
-interface ChatMessagesProps {
-  text?: string
-  onClick?: () => void
-}
-
 class ChatMessages extends Block {
   static componentName = 'ChatMessages'
-  constructor({ text, onClick }: ChatMessagesProps) {
-    super({ text, events: { click: onClick } })
+  constructor() {
+    super()
   }
 
   protected render(): string {

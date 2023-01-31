@@ -1,4 +1,4 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 import template from 'bundle-text:./dottedButton.hbs'
 
 import './dottedButton.scss'
@@ -8,7 +8,7 @@ interface DottedButtonProps {
   onClick?: () => void
 }
 
-class DottedButton extends Block {
+class DottedButton extends Block<DottedButtonProps> {
   static componentName = 'DottedButton'
   constructor({ text, onClick }: DottedButtonProps) {
     super({ text, events: { click: onClick } })

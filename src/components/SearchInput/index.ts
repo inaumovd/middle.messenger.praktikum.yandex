@@ -1,17 +1,12 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 import template from 'bundle-text:./searchInput.hbs'
 
 import './searchInput.scss'
 
-interface SearchInputProps {
-  text?: string
-  onClick?: () => void
-}
-
 class SearchInput extends Block {
   static componentName = 'SearchInput'
-  constructor({ text, onClick }: SearchInputProps) {
-    super({ text, events: { click: onClick } })
+  constructor() {
+    super()
   }
 
   protected render(): string {

@@ -1,10 +1,11 @@
 import Block from 'core/Block'
+import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 
 import './controlledInput.scss'
-import { validateForm, ValidateRuleType } from '../../helpers/validateForm'
 
 interface ControlledInputProps {
   onInput?: () => void
+  onBlur?: (e: FocusEvent) => void
   onFocus?: () => void
   type?: 'text' | 'password' | 'email'
   placeholder?: string
@@ -13,7 +14,7 @@ interface ControlledInputProps {
   name?: string
 }
 
-class ControlledInput extends Block {
+class ControlledInput extends Block<ControlledInputProps> {
   static componentName = 'ControlledInput'
   constructor({ type, name, ...props }: ControlledInputProps) {
     super({

@@ -1,16 +1,11 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 
 import './chatSidebar.scss'
 
-interface ChatSidebarProps {
-  text?: string
-  onClick?: () => void
-}
-
 class ChatSidebar extends Block {
   static componentName = 'ChatSidebar'
-  constructor({ text, onClick }: ChatSidebarProps) {
-    super({ text, events: { click: onClick } })
+  constructor() {
+    super()
   }
 
   protected render(): string {

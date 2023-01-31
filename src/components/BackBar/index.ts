@@ -1,4 +1,4 @@
-import Block from '../../core/Block'
+import Block from 'core/Block'
 
 import './backBar.scss'
 
@@ -7,7 +7,7 @@ interface BackBarProps {
   onClick?: () => void
 }
 
-class BackBar extends Block {
+class BackBar extends Block<BackBarProps> {
   static componentName = 'BackBar'
   constructor({ text, onClick }: BackBarProps) {
     super({ text, events: { click: onClick } })

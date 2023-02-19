@@ -2,24 +2,36 @@
   "name": "ya-chat",
   "version": "1.0.0",
   "description": "",
-  "source": "src/index.hbs",
-  "engines": {
-    "node": "15.x"
-  },
+  "source": "src/index.html",
   "scripts": {
-    "start": "parcel build src/index.hbs & node server.js",
-    "build": "parcel build",
-    "dev": "parcel src/index.hbs --no-cache"
+    "start": "parcel build src/index.html & npm run copy &node server.js",
+    "build": "parcel build && npm run copy",
+    "dev": "parcel src/index.html --no-source-maps --no-cache",
+    "copy": "cp netlify.toml dist"
+  },
+  "alias": {
+    "core": "./src/core",
+    "components": "./src/components",
+    "pages": "./src/pages",
+    "helpers": "./src/helpers"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "^1.0.9",
-    "@parcel/transformer-sass": "^2.8.0",
-    "parcel": "^2.8.0"
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@parcel/transformer-inline-string": "2.8.1",
+    "@parcel/transformer-sass": "2.8.1",
+    "@typescript-eslint/eslint-plugin": "5.46.1",
+    "@typescript-eslint/parser": "5.46.1",
+    "eslint-config-airbnb": "19.0.4",
+    "parcel": "2.8.1",
+    "prettier": "2.5.1",
+    "stylelint": "14.16.1"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "4.18.2",
+    "handlebars": "4.7.7",
+    "nanoid": "3.3.1"
   }
 }

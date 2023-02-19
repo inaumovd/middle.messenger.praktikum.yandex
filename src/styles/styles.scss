@@ -1,27 +1,4 @@
-//Partials
-@import '../partials/header/header.css';
-@import '../partials/input/input.scss';
-@import '../partials/button/button.scss';
-@import '../partials/linkButton/linkButton.scss';
-@import '../partials/chatSidebar/chatSidebar.scss';
-@import '../partials/searchInput/searchInput.scss';
-@import '../partials/chatItem/chatItem.scss';
-@import '../partials/chatMain/chatMain.scss';
-@import '../partials/addFileButton/addFileButton.scss';
-@import '../partials/sendMessageInput/sendMessageInput.scss';
-@import '../partials/roundedButton/roundedButton.scss';
-@import '../partials/chatMainHeader/chatMainHeader.scss';
-@import '../partials/chatMessages/chatMessages.scss';
-@import '../partials/dottedButton/dottedButton.scss';
-@import '../partials/backBar/backBar.scss';
-@import '../partials/settingsItem/settingsItem.scss';
-
-// Pages
-@import '../pages/login/login.scss';
-@import '../pages/register/register.scss';
-@import '../pages/chat/chat.scss';
-@import '../pages/settings/settings.scss';
-@import '../pages/404/404.scss';
+@import './constants.scss';
 
 .auth-form-container {
   display: flex;
@@ -31,7 +8,7 @@
   padding: 50px 30px 30px 30px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
   border-radius: 12px;
-  min-width: 340px;
+  min-width: 500px;
   box-sizing: border-box;
 }
 
@@ -47,7 +24,7 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 20px;
-  color: #1E1E1E;
+  color: var(--color-main-text);
   margin-bottom: 40px;
 }
 

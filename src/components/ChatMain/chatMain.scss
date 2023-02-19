@@ -1,0 +1,30 @@
+.chat-main {
+  flex-grow: 1;
+  padding: 0 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chat-main_footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--color-border-grey);
+}
+
+.chat-main_chat {
+  flex-grow: 1;
+}
+
+.chat-main_date {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--color-main-grey);
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}

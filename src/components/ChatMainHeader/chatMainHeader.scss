@@ -1,0 +1,25 @@
+.chat-header_userpic-wrapper {
+  width: 34px;
+  height: 34px;
+  background: var(--color-background-light);
+  border-radius: 30px;
+  margin-right: 10px;
+}
+
+.chat-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border-grey);
+}
+
+.chat-header_user-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 13px;
+  color: var(--color-main-black);
+}

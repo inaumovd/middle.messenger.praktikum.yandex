@@ -1,0 +1,56 @@
+.settings_container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.settings_user-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.settings_userpic-container {
+  width: 130px;
+  height: 130px;
+  background: var(--color-background-light);
+  border-radius: 100px;
+  margin-bottom: 21px;
+}
+
+.settings-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.settings_main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.settings_name {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: var(--color-main-black);
+}
+
+.settings_items-wrapper {
+  width: 50%;
+  margin-bottom: 60px;
+}
+
+.settings_links-wrapper {
+  width: 50%;
+}
+
+.settings_link-wrapper {
+  padding-bottom: 10px;
+  padding-top: 5px;
+  border-bottom: 1px solid var(--color-border-grey);
+  width: 100%;
+}

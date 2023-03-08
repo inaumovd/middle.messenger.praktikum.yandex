@@ -32,7 +32,10 @@ export class HTTPTransport {
     )
   }
 
-  put = (url: string, options: { data?: any; timeout?: number } = {}) => {
+  put = (
+    url: string,
+    options: { data?: any; timeout?: number; type?: string } = {},
+  ) => {
     return this.request(
       url,
       { ...options, method: METHODS.PUT },
@@ -57,9 +60,7 @@ export class HTTPTransport {
   }
 
   request(url: string, options: any, timeout: number = 5000) {
-    const { headers, data, method } = options
-
-    console.log(data)
+    const { headers, data, method, type } = options
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
@@ -85,7 +86,7 @@ export class HTTPTransport {
       if (method === METHODS.GET || !data) {
         xhr.send()
       } else {
-        xhr.send(JSON.stringify(data))
+        type === 'file' ? xhr.send(data) : xhr.send(JSON.stringify(data))
       }
     })
   }

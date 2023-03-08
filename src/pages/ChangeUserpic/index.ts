@@ -39,26 +39,23 @@ class ChangeUserpic extends Block {
     }
   }
 
-  onSubmit(event) {
-    console.log('TUT', event)
-    // .getContent()
-    // .querySelector('input[name="oldPassword"]') as HTMLInputElement
+  onSubmit() {
+    const myUserForm = document.getElementById('myUserForm')
+    const avatar = document.getElementById('avatar')
+    const form = new FormData(myUserForm)
 
-    // const api = new HTTPTransport()
-    // const host = 'https://ya-praktikum.tech/api/v2/user/password'
-    // api
-    //   .put(host, {
-    //     data: {
-    //       oldPassword: oldPasswordEl.value,
-    //       newPassword: newPasswordEl.value,
-    //     },
-    //     headers: { 'content-type': 'application/json' },
-    //   })
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       console.log('Пароль изменен')
-    //     }
-    //   })
+    const api = new HTTPTransport()
+    const host = 'https://ya-praktikum.tech/api/v2/user/profile/avatar'
+    api
+      .put(host, {
+        data: form,
+        type: 'file',
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log('Аватар изменен')
+        }
+      })
   }
 
   onInput(e: InputEvent) {
@@ -80,11 +77,10 @@ class ChangeUserpic extends Block {
         <div class="auth-container">
           <div class="auth-form-container">
               <form id="myUserForm">
-                  Картинка: <input id="avatar" type="file" name="avatar" accept="image/*">
-<!--                  <input type="submit">-->
+                  Выбрать аватар: <input id="avatar" type="file" name="avatar" accept="image/*">
                   {{{Button
-                          onClick=onSubmit
-                          text="Зарегистрироваться"
+                    onClick=onSubmit
+                    text="Сохранить"
                   }}}
               </form>
           </div>

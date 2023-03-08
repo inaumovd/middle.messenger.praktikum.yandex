@@ -1,10 +1,11 @@
 import Block from 'core/Block'
+import { withRouter } from '../../utils/withRouter'
 
 import './navPage.scss'
 
 class NavPage extends Block {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.setProps({
       onButtonClick: () => this.onButtonClick(),
@@ -12,22 +13,40 @@ class NavPage extends Block {
   }
 
   onButtonClick() {
-    console.log('123')
+    this.props.router.go('/login')
   }
 
   render() {
     // language=hbs
     return `
       <nav class='main-nav'>
-        <a href="./login">Login</a>
-        <a href="./register">Register</a>
-        <a href="./chat">Chat</a>
-        <a href="./settings">Settings</a>
-        <a href="./404">404</a>
-        <a href="./500">500</a>
+          {{{NavLinkButton
+            text='Login'
+            route='/login'
+          }}}
+          {{{NavLinkButton
+            text='Register'
+            route='/register'
+          }}}
+          {{{NavLinkButton
+            text='Chat'
+            route='/chat'
+          }}}
+          {{{NavLinkButton
+            text='Settings'
+            route='/settings'
+          }}}
+          {{{NavLinkButton
+            text='404'
+            route='/404'
+          }}}
+          {{{NavLinkButton
+            text='500'
+            route='/500'
+          }}}
       </nav>
     `
   }
 }
 
-export default NavPage
+export default withRouter(NavPage)

@@ -60,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
       block: LoginPage,
     },
     {
-      path: '/register',
+      path: '/sign-up',
       block: RegisterPage,
     },
     {
-      path: '/chat',
+      path: '/messenger',
       block: ChatPage,
     },
     {

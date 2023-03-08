@@ -26,11 +26,11 @@ class NavPage extends Block {
           }}}
           {{{NavLinkButton
             text='Register'
-            route='/register'
+            route='/sign-up'
           }}}
           {{{NavLinkButton
             text='Chat'
-            route='/chat'
+            route='/messenger'
           }}}
           {{{NavLinkButton
             text='Settings'

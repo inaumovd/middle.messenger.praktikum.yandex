@@ -1,10 +1,12 @@
 import Block from 'core/Block'
 
 import './register.scss'
+import { HTTPTransport } from '../../core/api'
+import { withRouter } from '../../utils/withRouter'
 
 class RegisterPage extends Block {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.setProps({
       onSubmit: () => this.onSubmit(),
@@ -46,16 +48,25 @@ class RegisterPage extends Block {
       })
     }
 
-    console.log(
-      'request to api ->',
-      emailEl.value,
-      loginlEl.value,
-      firstNameEl.value,
-      lastNameEl.value,
-      phoneEl.value,
-      passwordEl.value,
-      passwordConfirmEl.value,
-    )
+    const api = new HTTPTransport()
+    const host = 'https://ya-praktikum.tech/api/v2/auth/signup'
+    api
+      .post(host, {
+        data: {
+          first_name: firstNameEl.value,
+          second_name: lastNameEl.value,
+          login: loginlEl.value,
+          email: emailEl.value,
+          password: passwordEl.value,
+          phone: phoneEl.value,
+        },
+        headers: { 'content-type': 'application/json' },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          this.props.router.go('/messenger')
+        }
+      })
   }
 
   render() {
@@ -161,4 +172,4 @@ class RegisterPage extends Block {
   }
 }
 
-export default RegisterPage
+export default withRouter(RegisterPage)

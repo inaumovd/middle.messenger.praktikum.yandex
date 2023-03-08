@@ -30,6 +30,8 @@ import {
   RegisterPage,
   SettingsPage,
   NavPage,
+  ChangePassword,
+  ChangeUserpic,
 } from './pages'
 
 import Router from './core/Router'
@@ -82,6 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       path: '/',
       block: NavPage,
+    },
+    {
+      path: '/change-password',
+      block: ChangePassword,
+    },
+    {
+      path: '/change-userpic',
+      block: ChangeUserpic,
     },
   ]
 

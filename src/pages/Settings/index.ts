@@ -2,13 +2,17 @@ import Block from 'core/Block'
 import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 
 import './settings.scss'
+import { withRouter } from '../../utils/withRouter'
+import { HTTPTransport } from '../../core/api'
 
 class SettingsPage extends Block {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.setProps({
       onEditClick: () => this.onEditClick(),
+      onChangePasswordClick: () => this.onChangePasswordClick(),
+      onChangeUserpicClick: () => this.onChangeUserpicClick(),
       onInput: (e: InputEvent) => this.onInput(e),
       onFocus: (e: FocusEvent) => this.onFocus(e),
       onSaveClick: () => this.onSaveClick(),
@@ -20,6 +24,14 @@ class SettingsPage extends Block {
     this.setProps({
       isEditMode: true,
     })
+  }
+
+  onChangePasswordClick() {
+    this.props.router.go('/change-password')
+  }
+
+  onChangeUserpicClick() {
+    this.props.router.go('/change-userpic')
   }
 
   onSaveClick() {
@@ -62,17 +74,25 @@ class SettingsPage extends Block {
       { type: ValidateRuleType.Phone, value: phoneEl.value },
     ])
 
-    if (!errorMessage) {
-      console.log(
-        'request to api ->',
-        emailEl.value,
-        loginEl.value,
-        firstNameEl.value,
-        lastNameEl.value,
-        displayNameEl.value,
-        phoneEl.value,
-      )
-    }
+    const api = new HTTPTransport()
+    const host = 'https://ya-praktikum.tech/api/v2/user/profile'
+    api
+      .put(host, {
+        data: {
+          first_name: firstNameEl.value,
+          second_name: lastNameEl.value,
+          display_name: displayNameEl.value,
+          login: loginEl.value,
+          email: emailEl.value,
+          phone: phoneEl.value,
+        },
+        headers: { 'content-type': 'application/json' },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log('Данные успешно изменены')
+        }
+      })
 
     this.setProps({
       isEditMode: false,
@@ -252,12 +272,15 @@ class SettingsPage extends Block {
               <div class="settings_link-wrapper">
                 {{{LinkButton
                   text="Изменить пароль"
+                  onClick=onChangePasswordClick
                 }}}
               </div>
-              {{{LinkButton
-                text="Войти"
-                isRed=true
-              }}}
+                <div class="settings_link-wrapper">
+                {{{LinkButton
+                  text="Изменить аватар"
+                  onClick=onChangeUserpicClick
+                }}}
+                </div>
             </div>
 
           </div>
@@ -267,4 +290,4 @@ class SettingsPage extends Block {
   }
 }
 
-export default SettingsPage
+export default withRouter(SettingsPage)

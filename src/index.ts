@@ -1,4 +1,4 @@
-import { renderDOM, registerComponent } from './core'
+import { registerComponent } from './core'
 
 import './styles/styles.scss'
 
@@ -19,6 +19,7 @@ import {
   Button,
   Error,
   ControlledInput,
+  NavLinkButton,
 } from './components'
 
 import {
@@ -30,6 +31,8 @@ import {
   SettingsPage,
   NavPage,
 } from './pages'
+
+import Router from './core/Router'
 
 registerComponent(LinkButton)
 registerComponent(BackBar)
@@ -47,52 +50,44 @@ registerComponent(Input)
 registerComponent(Button)
 registerComponent(Error)
 registerComponent(ControlledInput)
+registerComponent(NavLinkButton)
 
-// Временный роутер
-const getPage = () => {
-  const currentRoute = window.location.href
-    .toString()
-    .split(window.location.host)[1]
-
+document.addEventListener('DOMContentLoaded', () => {
+  const router = new Router()
   const routes = [
     {
       path: '/login',
-      page: LoginPage,
+      block: LoginPage,
     },
     {
       path: '/register',
-      page: RegisterPage,
+      block: RegisterPage,
     },
     {
       path: '/chat',
-      page: ChatPage,
+      block: ChatPage,
     },
     {
       path: '/settings',
-      page: SettingsPage,
+      block: SettingsPage,
     },
     {
       path: '/404',
-      page: Page404,
+      block: Page404,
     },
     {
       path: '/500',
-      page: Page500,
+      block: Page500,
+    },
+    {
+      path: '/',
+      block: NavPage,
     },
   ]
-  let currentPage = NavPage
 
   routes.forEach((route) => {
-    if (route.path === currentRoute) {
-      // @ts-ignore
-      currentPage = route.page
-    }
+    router.use(route.path, route.block)
   })
 
-  return currentPage
-}
-const Page = getPage()
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderDOM(new Page())
+  router.start()
 })

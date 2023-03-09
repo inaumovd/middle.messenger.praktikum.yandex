@@ -11,19 +11,33 @@ class ChatSidebar extends Block {
 
     this.setProps({
       onExitClick: () => this.onExitClick(),
+      onCreateChatClick: () => this.onCreateChatClick(),
     })
   }
 
   onExitClick() {
-    console.log('EXIT')
     const api = new HTTPTransport()
     const host = 'https://ya-praktikum.tech/api/v2/auth/logout'
     api.post(host).then((res) => {
-      console.log(res)
       if (res.status === 200) {
         this.props.router.go('/')
       }
     })
+  }
+
+  onCreateChatClick() {
+    const api = new HTTPTransport()
+    const host = 'https://ya-praktikum.tech/api/v2/chats'
+    api
+      .post(host, {
+        data: { title: 'New chat' },
+        headers: { 'content-type': 'application/json' },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res)
+        }
+      })
   }
 
   protected render(): string {
@@ -35,6 +49,10 @@ class ChatSidebar extends Block {
           {{{LinkButton
             onClick=onExitClick
             text='Выход'
+          }}}
+          {{{LinkButton
+            onClick=onCreateChatClick
+            text='Новый чат'
           }}}
               <a class="profile-button">Профиль ></a>
           </div>

@@ -9,7 +9,6 @@ function queryStringify(data: any) {
   let queryStr = '?'
   const dataArr = Object.entries(data)
   dataArr.forEach((item, el) => {
-    console.log(el < dataArr.length - 1)
     let amper = el < dataArr.length - 1 ? '&' : ''
     const str = `${item[0]}=${item[1]}${amper}`
     queryStr = queryStr + str

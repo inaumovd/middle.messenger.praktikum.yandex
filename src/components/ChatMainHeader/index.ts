@@ -24,7 +24,7 @@ class ChatMainHeader extends Block {
       })
       .then((res) => {
         if (res.status === 200) {
-          this.props.router.go('/')
+          console.log('Пользователь добавлен')
         }
       })
   }
@@ -39,7 +39,7 @@ class ChatMainHeader extends Block {
       })
       .then((res) => {
         if (res.status === 200) {
-          this.props.router.go('/')
+          console.log('Пользователь удален')
         }
       })
   }
@@ -53,10 +53,12 @@ class ChatMainHeader extends Block {
 	        </div>
 	        <span>Вадим</span>
 	      </div>
-    		{{{DottedButton
+    		{{{LinkButton
+            text='Добавить пользователя в чат'
             onClick=onAddUserClick
         }}}
-        {{{DottedButton
+        {{{LinkButton
+            text='Удалить пользователя из чата'
             onClick=onDeleteUserClick
         }}}
 			</div>

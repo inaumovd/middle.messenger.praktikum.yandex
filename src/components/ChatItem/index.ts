@@ -5,6 +5,7 @@ import SocketChat from '../../core/ws'
 import { HTTPTransport } from '../../core/api'
 import { Store } from '../../core/store'
 import Router from '../../core/Router'
+import { withStore } from '../../utils/withStore'
 
 interface ChatItemProps {
   store: Store<any>
@@ -21,6 +22,8 @@ class ChatItem extends Block<ChatItemProps> {
       ...props,
       events: {
         click: () => {
+          props.store.dispatch({ currentChat: props.chat.id })
+
           const api = new HTTPTransport()
           const host3 = `https://ya-praktikum.tech/api/v2/chats/token/${props.chat.id}`
           api.post(host3).then((response) => {
@@ -29,7 +32,13 @@ class ChatItem extends Block<ChatItemProps> {
             const onOpenChat = () => {
               this?.chat?.getOldMessages(0)
             }
-            this.chat.start(parsedRes.token, 612587, props.chat.id, onOpenChat)
+
+            this.chat.start(
+              parsedRes.token,
+              props.store.getState().user.id,
+              props.chat.id,
+              onOpenChat,
+            )
           })
         },
       },
@@ -70,4 +79,4 @@ class ChatItem extends Block<ChatItemProps> {
   }
 }
 
-export default ChatItem
+export default withStore(ChatItem)

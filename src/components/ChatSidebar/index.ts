@@ -44,7 +44,13 @@ class ChatSidebar extends Block<ChatSidebarProps> {
       })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res)
+          const host = 'https://ya-praktikum.tech/api/v2/chats'
+          api.get(host).then((res) => {
+            if (res.status === 200) {
+              const parsedRes = JSON.parse(res.response)
+              this.props.store.dispatch({ chatsList: parsedRes })
+            }
+          })
         }
       })
   }

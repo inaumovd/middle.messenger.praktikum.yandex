@@ -32,11 +32,11 @@ class ChatMain extends Block {
     		{{{ChatMainHeader}}}
     		{{{ChatMessages}}}
     		<div class="chat-main_footer">
-        	{{{AddFileButton}}}
         	{{{SendMessageInput
             name='message'
             onInput=onInput
             ref="messageInputRef"
+            text='Сообщение'
           }}}
         	{{{RoundedButton
             onClick=onSubmit

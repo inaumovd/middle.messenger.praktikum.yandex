@@ -1,5 +1,5 @@
 .chat-messages {
-  flex-grow: 1;
+  overflow: scroll;
 }
 
 .chat-messages_date {
@@ -15,6 +15,7 @@
 .chat-messages_message-wrapper {
   padding: 11px;
   position: relative;
+  width: 100%;
 }
 
 .chat-messages_message-wrapper--partner {
@@ -37,7 +38,7 @@
 .chat-messages_list-item {
   display: flex;
   margin-bottom: 10px;
-  max-width: 50%;
+  flex-grow: 1;
 }
 
 .chat-messages_list-item--my {

@@ -48,19 +48,34 @@ class ChatMainHeader extends Block {
     // language=hbs
     return `
 			<div class="chat-header">
-	      <div class="chat-header_user-info">
-	        <div class="chat-header_userpic-wrapper">
-	        </div>
-	        <span>Вадим</span>
-	      </div>
-    		{{{LinkButton
-            text='Добавить пользователя в чат'
-            onClick=onAddUserClick
-        }}}
-        {{{LinkButton
-            text='Удалить пользователя из чата'
-            onClick=onDeleteUserClick
-        }}}
+          <div class="chat-button-wrapper">
+            {{{Button
+              text='Добавить юзера'
+              onClick=onAddUserClick
+            }}}
+              <div class="chat-input-wrapper">
+                {{{SendMessageInput
+                  name='deleteUserId'
+                  onInput=onInput
+                  ref="deleteUserIdInputRef"
+                  text='UserId'
+                }}}
+              </div>
+          </div>
+          <div class="chat-button-wrapper">
+            {{{Button
+              text='Удалить юзера'
+              onClick=onDeleteUserClick
+            }}}
+            <div class="chat-input-wrapper">
+              {{{SendMessageInput
+                name='deleteUserId'
+                onInput=onInput
+                ref="deleteUserIdInputRef"
+                text='UserId'
+              }}}
+            </div>
+          </div>
 			</div>
 		`
   }

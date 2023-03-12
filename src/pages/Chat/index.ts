@@ -3,21 +3,15 @@ import Block from 'core/Block'
 import './chat.scss'
 import { HTTPTransport } from '../../core/api'
 import SocketChat from '../../core/ws'
+import { withStore } from '../../utils/withStore'
 
 class ChatPage extends Block {
   private chat: SocketChat | undefined
   public messages: any
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/chats'
-    api.get(host).then((res) => {
-      if (res.status === 200) {
-        console.log(res)
-      }
-    })
-
     const host2 = 'https://ya-praktikum.tech/api/v2/auth/user'
     api.get(host2).then((res) => {
       if (res.status === 200) {
@@ -25,15 +19,17 @@ class ChatPage extends Block {
       }
     })
 
-    const host3 = 'https://ya-praktikum.tech/api/v2/chats/token/6996'
-    api.post(host3).then((response) => {
-      const parsedRes = JSON.parse(response.response)
-      const chat = new SocketChat()
-      this.chat = chat
-      this.chat.start(parsedRes.token, 612587, 6996)
-      // this.messages = this.chat.getOldMessages(0)
-      //
-      // console.log('MESS', this.messages)
+    const host = 'https://ya-praktikum.tech/api/v2/chats'
+    api.get(host).then((res) => {
+      if (res.status === 200) {
+        const parsedRes = JSON.parse(res.response)
+        // console.log('чаты => ', parsedRes, this.props.store.dispatch)
+        this.props.store.dispatch({ chatsList: parsedRes })
+        // this.chats = parsedRes
+        // this.setProps({
+        //   chats: parsedRes,
+        // })
+      }
     })
   }
 
@@ -42,7 +38,8 @@ class ChatPage extends Block {
     return `
       <main class="main">
         <div class="chat-page">
-          {{{ChatSidebar}}}
+          {{{ChatSidebar
+          }}}
           {{{ChatMain}}}
         </div>
       </main>
@@ -50,4 +47,4 @@ class ChatPage extends Block {
   }
 }
 
-export default ChatPage
+export default withStore(ChatPage)

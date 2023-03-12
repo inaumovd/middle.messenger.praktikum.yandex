@@ -3,15 +3,24 @@ import Block from 'core/Block'
 import './chatSidebar.scss'
 import { withRouter } from '../../utils/withRouter'
 import { HTTPTransport } from '../../core/api'
+import { withStore } from '../../utils/withStore'
+import { Store } from '../../core/store'
+import Router from '../../core/Router'
 
-class ChatSidebar extends Block {
+interface ChatSidebarProps {
+  store: Store<any>
+  router: Router
+}
+
+class ChatSidebar extends Block<ChatSidebarProps> {
   static componentName = 'ChatSidebar'
-  constructor(props) {
+  constructor(props: ChatSidebarProps) {
     super(props)
 
     this.setProps({
       onExitClick: () => this.onExitClick(),
       onCreateChatClick: () => this.onCreateChatClick(),
+      chats: this.props.store.getState().chatsList,
     })
   }
 
@@ -46,28 +55,29 @@ class ChatSidebar extends Block {
 		  <div class="chat-sidebar">
         <div class="chat-sidebar_header">
           <div class="profile-button-wrapper">
-          {{{LinkButton
-            onClick=onExitClick
-            text='Выход'
-          }}}
-          {{{LinkButton
-            onClick=onCreateChatClick
-            text='Новый чат'
-          }}}
-              <a class="profile-button">Профиль ></a>
-          </div>
+            <div class="chat-button-wrapper">
+              {{{Button
+                onClick=onExitClick
+                text='Выход'
+              }}}
+            </div>
 
-          <div>
-              {{{SearchInput}}}
+            {{{Button
+              onClick=onCreateChatClick
+              text='Новый чат'
+            }}}
           </div>
         </div>
-
         <ul class="chat-list">
-            {{{ChatItem}}}
+          {{#each chats}}
+            {{{ChatItem
+              chat=this
+            }}}
+          {{/each}}
         </ul>
       </div>
 		`
   }
 }
 
-export default withRouter(ChatSidebar)
+export default withStore(withRouter(ChatSidebar))

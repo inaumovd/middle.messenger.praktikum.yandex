@@ -20,6 +20,7 @@ import {
   Error,
   ControlledInput,
   NavLinkButton,
+  ChatMessage,
 } from './components'
 
 import {
@@ -35,6 +36,7 @@ import {
 } from './pages'
 
 import Router from './core/Router'
+import { Store } from './core/store'
 
 registerComponent(LinkButton)
 registerComponent(BackBar)
@@ -53,9 +55,14 @@ registerComponent(Button)
 registerComponent(Error)
 registerComponent(ControlledInput)
 registerComponent(NavLinkButton)
+registerComponent(ChatMessage)
 
 document.addEventListener('DOMContentLoaded', () => {
   const router = new Router()
+
+  const store = new Store({ chatsList: null })
+  window.store = store
+
   const routes = [
     {
       path: '/login',

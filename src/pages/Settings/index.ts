@@ -207,7 +207,7 @@ class SettingsPage extends Block {
                 <!--                <img  alt="">-->
               </div>
               <span class="settings_name">
-                    Иван
+                    Изменить данные пользователя
                 </span>
             </div>
 

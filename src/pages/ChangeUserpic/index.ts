@@ -4,6 +4,7 @@ import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 import './login.scss'
 import { HTTPTransport } from '../../core/api'
 import { withRouter } from '../../utils/withRouter'
+import { onChangeAvatarApiCall } from '../../services/apiCalls'
 
 class ChangeUserpic extends Block {
   constructor(props) {
@@ -44,18 +45,10 @@ class ChangeUserpic extends Block {
     const avatar = document.getElementById('avatar')
     const form = new FormData(myUserForm)
 
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/user/profile/avatar'
-    api
-      .put(host, {
-        data: form,
-        type: 'file',
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log('Аватар изменен')
-        }
-      })
+    onChangeAvatarApiCall({
+      data: form,
+      type: 'file',
+    })
   }
 
   onInput(e: InputEvent) {

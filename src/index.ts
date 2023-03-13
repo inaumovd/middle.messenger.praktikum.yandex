@@ -38,6 +38,7 @@ import {
 import Router from './core/Router'
 import { Store } from './core/store'
 import { HTTPTransport } from './core/api'
+import { getMeApiCall } from './services/apiCalls'
 
 registerComponent(LinkButton)
 registerComponent(BackBar)
@@ -109,12 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   router.start()
 
-  const api = new HTTPTransport()
-  const host2 = 'https://ya-praktikum.tech/api/v2/auth/user'
-  api.get(host2).then((res) => {
-    if (res.status === 200) {
-      const parsedRes = JSON.parse(res.response)
-      window.store.dispatch({ user: parsedRes })
-    }
+  getMeApiCall((payload) => {
+    window.store.dispatch({ user: payload })
   })
 })

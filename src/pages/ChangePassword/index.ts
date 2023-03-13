@@ -4,6 +4,7 @@ import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 import './login.scss'
 import { HTTPTransport } from '../../core/api'
 import { withRouter } from '../../utils/withRouter'
+import { onChangePasswordApiCall } from '../../services/apiCalls'
 
 class ChangePasswordPage extends Block {
   constructor(props) {
@@ -53,21 +54,13 @@ class ChangePasswordPage extends Block {
       { type: ValidateRuleType.Password, value: newPasswordEl.value },
     ])
 
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/user/password'
-    api
-      .put(host, {
-        data: {
-          oldPassword: oldPasswordEl.value,
-          newPassword: newPasswordEl.value,
-        },
-        headers: { 'content-type': 'application/json' },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log('Пароль изменен')
-        }
-      })
+    onChangePasswordApiCall({
+      data: {
+        oldPassword: oldPasswordEl.value,
+        newPassword: newPasswordEl.value,
+      },
+      headers: { 'content-type': 'application/json' },
+    })
   }
 
   onInput(e: InputEvent) {

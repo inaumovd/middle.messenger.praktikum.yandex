@@ -6,6 +6,7 @@ import { HTTPTransport } from '../../core/api'
 import { Store } from '../../core/store'
 import Router from '../../core/Router'
 import { withStore } from '../../utils/withStore'
+import { postChatTokenApiCall } from '../../services/apiCalls'
 
 interface ChatItemProps {
   store: Store<any>
@@ -23,18 +24,14 @@ class ChatItem extends Block<ChatItemProps> {
       events: {
         click: () => {
           props.store.dispatch({ currentChat: props.chat.id })
-
-          const api = new HTTPTransport()
-          const host3 = `https://ya-praktikum.tech/api/v2/chats/token/${props.chat.id}`
-          api.post(host3).then((response) => {
-            const parsedRes = JSON.parse(response.response)
+          postChatTokenApiCall(props.chat.id, (payload) => {
             this.chat = new SocketChat()
             const onOpenChat = () => {
               this?.chat?.getOldMessages(0)
             }
 
             this.chat.start(
-              parsedRes.token,
+              payload.token,
               props.store.getState().user.id,
               props.chat.id,
               onOpenChat,

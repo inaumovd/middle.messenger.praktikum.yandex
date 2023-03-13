@@ -3,6 +3,7 @@ import Block from 'core/Block'
 import './register.scss'
 import { HTTPTransport } from '../../core/api'
 import { withRouter } from '../../utils/withRouter'
+import { onSignUpApiCall } from '../../services/apiCalls'
 
 class RegisterPage extends Block {
   constructor(props) {
@@ -48,10 +49,8 @@ class RegisterPage extends Block {
       })
     }
 
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/auth/signup'
-    api
-      .post(host, {
+    onSignUpApiCall(
+      {
         data: {
           first_name: firstNameEl.value,
           second_name: lastNameEl.value,
@@ -61,12 +60,11 @@ class RegisterPage extends Block {
           phone: phoneEl.value,
         },
         headers: { 'content-type': 'application/json' },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          this.props.router.go('/messenger')
-        }
-      })
+      },
+      () => {
+        this.props.router.go('/messenger')
+      },
+    )
   }
 
   render() {

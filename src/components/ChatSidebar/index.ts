@@ -6,6 +6,11 @@ import { HTTPTransport } from '../../core/api'
 import { withStore } from '../../utils/withStore'
 import { Store } from '../../core/store'
 import Router from '../../core/Router'
+import {
+  getChatsApiCall,
+  onLogoutApiCall,
+  onPostChatApiCall,
+} from '../../services/apiCalls'
 
 interface ChatSidebarProps {
   store: Store<any>
@@ -25,34 +30,23 @@ class ChatSidebar extends Block<ChatSidebarProps> {
   }
 
   onExitClick() {
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/auth/logout'
-    api.post(host).then((res) => {
-      if (res.status === 200) {
-        this.props.router.go('/')
-      }
+    onLogoutApiCall(() => {
+      this.props.router.go('/')
     })
   }
 
   onCreateChatClick() {
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/chats'
-    api
-      .post(host, {
+    onPostChatApiCall(
+      {
         data: { title: 'New chat' },
         headers: { 'content-type': 'application/json' },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          const host = 'https://ya-praktikum.tech/api/v2/chats'
-          api.get(host).then((res) => {
-            if (res.status === 200) {
-              const parsedRes = JSON.parse(res.response)
-              this.props.store.dispatch({ chatsList: parsedRes })
-            }
-          })
-        }
-      })
+      },
+      () => {
+        getChatsApiCall((payload) => {
+          this.props.store.dispatch({ chatsList: payload })
+        })
+      },
+    )
   }
 
   protected render(): string {

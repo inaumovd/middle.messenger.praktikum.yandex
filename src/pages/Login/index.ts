@@ -4,6 +4,7 @@ import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 import './login.scss'
 import { HTTPTransport } from '../../core/api'
 import { withRouter } from '../../utils/withRouter'
+import { onSignInApiCall } from '../../services/apiCalls'
 
 class LoginPage extends Block {
   constructor(props) {
@@ -59,22 +60,18 @@ class LoginPage extends Block {
       { type: ValidateRuleType.Password, value: passwordEl.value },
     ])
 
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/auth/signin'
-    api
-      .post(host, {
+    onSignInApiCall(
+      {
         data: {
           login: emailEl.value,
           password: passwordEl.value,
         },
         headers: { 'content-type': 'application/json' },
-      })
-      .then((res) => {
-        console.log(res.status)
-        if (res.status === 200) {
-          this.props.router.go('/messenger')
-        }
-      })
+      },
+      () => {
+        this.props.router.go('/messenger')
+      },
+    )
   }
 
   onInput(e: InputEvent) {

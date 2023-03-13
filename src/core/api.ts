@@ -63,7 +63,7 @@ export class HTTPTransport {
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
-      xhr.open(method, url)
+      xhr.open(method, `https://ya-praktikum.tech/api/v2/${url}`)
 
       if (headers) {
         const headersArr = Object.entries(headers)

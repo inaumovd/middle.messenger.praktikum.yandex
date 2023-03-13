@@ -1,6 +1,7 @@
 import Block from 'core/Block'
 
 import './backBar.scss'
+import { withRouter } from '../../utils/withRouter'
 
 interface BackBarProps {
   text?: string
@@ -9,17 +10,27 @@ interface BackBarProps {
 
 class BackBar extends Block<BackBarProps> {
   static componentName = 'BackBar'
-  constructor({ text, onClick }: BackBarProps) {
-    super({ text, events: { click: onClick } })
+  constructor({ text, onClick, router }: BackBarProps) {
+    super({ router, text, events: { click: onClick } })
+
+    this.setProps({
+      onBackClick: () => this.onBackClick(),
+    })
+  }
+
+  onBackClick() {
+    this.props.router.go('/messenger')
   }
 
   protected render(): string {
     return `
 			<div class="back-bar">
-	      {{{RoundedButton}}}
+	      {{{RoundedButton
+	        onClick=onBackClick
+	      }}}
 			</div>
 		`
   }
 }
 
-export default BackBar
+export default withRouter(BackBar)

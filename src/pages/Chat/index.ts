@@ -1,23 +1,16 @@
 import Block from 'core/Block'
 
 import './chat.scss'
-import { HTTPTransport } from '../../core/api'
-import SocketChat from '../../core/ws'
 import { withStore } from '../../utils/withStore'
+import { getChatsApiCall } from '../../services/apiCalls'
 
 class ChatPage extends Block {
-  private chat: SocketChat | undefined
   public messages: any
   constructor(props) {
     super(props)
 
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/chats'
-    api.get(host).then((res) => {
-      if (res.status === 200) {
-        const parsedRes = JSON.parse(res.response)
-        this.props.store.dispatch({ chatsList: parsedRes })
-      }
+    getChatsApiCall((payload) => {
+      this.props.store.dispatch({ chatsList: payload })
     })
   }
 

@@ -3,6 +3,7 @@ import Block from 'core/Block'
 import './chatMainHeader.scss'
 import { HTTPTransport } from '../../core/api'
 import { withStore } from '../../utils/withStore'
+import { onAddUserApiCall, onDeleteUserApiCall } from '../../services/apiCalls'
 
 class ChatMainHeader extends Block {
   static componentName = 'ChatMainHeader'
@@ -37,21 +38,13 @@ class ChatMainHeader extends Block {
       .getContent()
       .querySelector('input[name="addUserId"]') as HTMLInputElement
 
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/chats/users'
-    api
-      .put(host, {
-        data: {
-          users: [Number(addUserIdEl.value)],
-          chatId: this.props.store.getState().currentChat,
-        },
-        headers: { 'content-type': 'application/json' },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log('Пользователь добавлен')
-        }
-      })
+    onAddUserApiCall({
+      data: {
+        users: [Number(addUserIdEl.value)],
+        chatId: this.props.store.getState().currentChat,
+      },
+      headers: { 'content-type': 'application/json' },
+    })
   }
 
   onDeleteUserClick() {
@@ -59,21 +52,13 @@ class ChatMainHeader extends Block {
       .getContent()
       .querySelector('input[name="deleteUserId"]') as HTMLInputElement
 
-    const api = new HTTPTransport()
-    const host = 'https://ya-praktikum.tech/api/v2/chats/users'
-    api
-      .delete(host, {
-        data: {
-          users: [Number(deleteUserIdEl.value)],
-          chatId: this.props.store.getState().currentChat,
-        },
-        headers: { 'content-type': 'application/json' },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log('Пользователь удален')
-        }
-      })
+    onDeleteUserApiCall({
+      data: {
+        users: [Number(deleteUserIdEl.value)],
+        chatId: this.props.store.getState().currentChat,
+      },
+      headers: { 'content-type': 'application/json' },
+    })
   }
 
   protected render(): string {

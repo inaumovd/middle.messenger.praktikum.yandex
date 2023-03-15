@@ -14,6 +14,8 @@ import LinkButton from './LinkButton'
 import Button from './Button'
 import Error from './Error'
 import ControlledInput from './ControlledInput'
+import NavLinkButton from './NavLinkButton'
+import ChatMessage from './ChatMessage'
 
 export {
   ChatItem,
@@ -32,4 +34,6 @@ export {
   Button,
   Error,
   ControlledInput,
+  NavLinkButton,
+  ChatMessage,
 }

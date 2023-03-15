@@ -1,14 +1,19 @@
 import Block from 'core/Block'
 
 import './register.scss'
+import { withRouter } from '../../utils/withRouter'
+import { AuthApi } from '../../services/auth'
 
 class RegisterPage extends Block {
-  constructor() {
-    super()
+  private authApi: AuthApi
+  constructor(props) {
+    super(props)
 
     this.setProps({
       onSubmit: () => this.onSubmit(),
     })
+
+    this.authApi = new AuthApi()
   }
 
   onSubmit() {
@@ -46,16 +51,14 @@ class RegisterPage extends Block {
       })
     }
 
-    console.log(
-      'request to api ->',
-      emailEl.value,
-      loginlEl.value,
-      firstNameEl.value,
-      lastNameEl.value,
-      phoneEl.value,
-      passwordEl.value,
-      passwordConfirmEl.value,
-    )
+    this.authApi.signUp({
+      first_name: firstNameEl.value,
+      second_name: lastNameEl.value,
+      login: loginlEl.value,
+      email: emailEl.value,
+      password: passwordEl.value,
+      phone: phoneEl.value,
+    })
   }
 
   render() {
@@ -161,4 +164,4 @@ class RegisterPage extends Block {
   }
 }
 
-export default RegisterPage
+export default withRouter(RegisterPage)

@@ -10,7 +10,15 @@ interface ButtonProps {
 class Button extends Block<ButtonProps> {
   static componentName = 'Button'
   constructor({ text, onClick }: ButtonProps) {
-    super({ text, events: { click: onClick } })
+    super({
+      text,
+      events: {
+        click: (e) => {
+          e.preventDefault()
+          onClick()
+        },
+      },
+    })
   }
 
   protected render(): string {

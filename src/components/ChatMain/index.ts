@@ -1,15 +1,19 @@
 import Block from 'core/Block'
 
 import './chatMain.scss'
+import SocketChat from '../../core/ws'
 
 class ChatMain extends Block {
   static componentName = 'ChatMain'
+  private chat: SocketChat
   constructor() {
     super()
 
     this.setProps({
       onSubmit: () => this.onSubmit(),
     })
+
+    this.chat = new SocketChat()
   }
 
   onSubmit() {
@@ -17,7 +21,7 @@ class ChatMain extends Block {
       this.refs.messageInputRef.getContent() as HTMLInputElement
 
     if (messageInputEl.value) {
-      console.log('send message request ->', messageInputEl.value)
+      this.chat.message(messageInputEl.value)
     }
   }
 
@@ -28,11 +32,11 @@ class ChatMain extends Block {
     		{{{ChatMainHeader}}}
     		{{{ChatMessages}}}
     		<div class="chat-main_footer">
-        	{{{AddFileButton}}}
         	{{{SendMessageInput
             name='message'
             onInput=onInput
             ref="messageInputRef"
+            text='Сообщение'
           }}}
         	{{{RoundedButton
             onClick=onSubmit

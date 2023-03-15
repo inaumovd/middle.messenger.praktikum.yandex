@@ -15,7 +15,7 @@ class SendMessageInput extends Block<SendMessageInputProps> {
   }
 
   protected render(): string {
-    return template
+    return `<input class="message-input" type="text" placeholder={{text}}>`
   }
 }
 

@@ -2,17 +2,30 @@ import Block from 'core/Block'
 import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 
 import './settings.scss'
+import { withRouter } from '../../utils/withRouter'
+import { withStore } from '../../utils/withStore'
+import { ProfileApi } from '../../services/profile'
+import { AuthApi } from '../../services/auth'
 
 class SettingsPage extends Block {
-  constructor() {
-    super()
+  private profileApi: ProfileApi
+  private authApi: AuthApi
+  constructor(props) {
+    super(props)
+
+    this.authApi = new AuthApi()
+    this.profileApi = new ProfileApi()
+    this.authApi.userInfo()
 
     this.setProps({
       onEditClick: () => this.onEditClick(),
+      onChangePasswordClick: () => this.onChangePasswordClick(),
+      onChangeUserpicClick: () => this.onChangeUserpicClick(),
       onInput: (e: InputEvent) => this.onInput(e),
       onFocus: (e: FocusEvent) => this.onFocus(e),
       onSaveClick: () => this.onSaveClick(),
-      isEditMode: true,
+      isEditMode: false,
+      user: this?.props?.store.getState().user,
     })
   }
 
@@ -20,6 +33,14 @@ class SettingsPage extends Block {
     this.setProps({
       isEditMode: true,
     })
+  }
+
+  onChangePasswordClick() {
+    this.props.router.go('/change-password')
+  }
+
+  onChangeUserpicClick() {
+    this.props.router.go('/change-userpic')
   }
 
   onSaveClick() {
@@ -62,17 +83,14 @@ class SettingsPage extends Block {
       { type: ValidateRuleType.Phone, value: phoneEl.value },
     ])
 
-    if (!errorMessage) {
-      console.log(
-        'request to api ->',
-        emailEl.value,
-        loginEl.value,
-        firstNameEl.value,
-        lastNameEl.value,
-        displayNameEl.value,
-        phoneEl.value,
-      )
-    }
+    this.profileApi.changeProfileInfo({
+      first_name: firstNameEl.value,
+      second_name: lastNameEl.value,
+      display_name: displayNameEl.value,
+      login: loginEl.value,
+      email: emailEl.value,
+      phone: phoneEl.value,
+    })
 
     this.setProps({
       isEditMode: false,
@@ -178,7 +196,7 @@ class SettingsPage extends Block {
     return `
       <main class="main">
         <div class="settings settings_container">
-
+            
           {{{BackBar}}}
 
           <div class="settings_main-wrapper">
@@ -186,80 +204,119 @@ class SettingsPage extends Block {
               <div class="settings_userpic-container">
                 <!--                <img  alt="">-->
               </div>
-              <span class="settings_name">
-                    Иван
-                </span>
+                {{#if isEditMode}}
+                  <span class="settings_name">
+                    Изменить данные пользователя
+                  </span>
+                {{else}}
+                  <span class="settings_name">
+                    Данные пользователя
+                  </span>
+                {{/if}}
             </div>
+              {{#if isEditMode}}
+                  <div class="settings_items-wrapper">
+                      {{{ControlledInput
+                              name="email"
+                              placeholder="Email"
+                              type="email"
+                              onInput=onInput
+                              onFocus=onFocus
+                              ref="emailInputRef"
+                      }}}
+                      {{{ControlledInput
+                              name="login"
+                              placeholder="Логин"
+                              type="login"
+                              onInput=onInput
+                              onFocus=onFocus
+                              ref="loginInputRef"
+                      }}}
+                      {{{ControlledInput
+                              name="first_name"
+                              placeholder="Имя"
+                              type="firstName"
+                              onInput=onInput
+                              onFocus=onFocus
+                              ref="firstNameInputRef"
+                      }}}
+                      {{{ControlledInput
+                              name="last_name"
+                              placeholder="Фамилия"
+                              type="lastName"
+                              onInput=onInput
+                              onFocus=onFocus
+                              ref="lastNameInputRef"
+                      }}}
+                      {{{ControlledInput
+                              name="display_name"
+                              placeholder="Имя в чате"
+                              type="displayName"
+                              onInput=onInput
+                              onFocus=onFocus
+                              ref="displayNameInputRef"
+                      }}}
+                      {{{ControlledInput
+                              name="phone"
+                              placeholder="Телефон"
+                              type="phone"
+                              onInput=onInput
+                              onFocus=onFocus
+                              ref="phoneInputRef"
+                      }}}
+                  </div>
+              {{else}}
+                  <div class="settings_items-wrapper">
+                      <div class="settings-item">
+                          <span>Email</span> <span>{{user.email}}</span>
+                      </div>
+                      <div class="settings-item">
+                          <span>Логин</span> <span>{{user.login}}</span>
+                      </div>
+                      <div class="settings-item">
+                          <span>Имя</span> <span>{{user.first_name}}</span>
+                      </div>
+                      <div class="settings-item">
+                          <span>Фамилия</span> <span>{{user.second_name}}</span>
+                      </div>
+                      <div class="settings-item">
+                          <span>Имя в чате</span> <span>{{user.display_name}}</span>
+                      </div>
+                      <div class="settings-item">
+                          <span>Телефон</span> <span>{{user.phone}}</span>
+                      </div>
+                  </div>
+              {{/if}}
 
-            <div class="settings_items-wrapper">
-                {{{ControlledInput
-                  name="email"
-                  placeholder="Email"
-                  type="email"
-                  onInput=onInput
-                  onFocus=onFocus
-                  ref="emailInputRef"
-                }}}
-                {{{ControlledInput
-                  name="login"
-                  placeholder="Логин"
-                  type="login"
-                  onInput=onInput
-                  onFocus=onFocus
-                  ref="loginInputRef"
-                }}}
-                {{{ControlledInput
-                  name="first_name"
-                  placeholder="Имя"
-                  type="firstName"
-                  onInput=onInput
-                  onFocus=onFocus
-                  ref="firstNameInputRef"
-                }}}
-                {{{ControlledInput
-                  name="last_name"
-                  placeholder="Фамилия"
-                  type="lastName"
-                  onInput=onInput
-                  onFocus=onFocus
-                  ref="lastNameInputRef"
-                }}}
-                {{{ControlledInput
-                  name="display_name"
-                  placeholder="Имя в чате"
-                  type="displayName"
-                  onInput=onInput
-                  onFocus=onFocus
-                  ref="displayNameInputRef"
-                }}}
-                {{{ControlledInput
-                  name="phone"
-                  placeholder="Телефон"
-                  type="phone"
-                  onInput=onInput
-                  onFocus=onFocus
-                  ref="phoneInputRef"
-                }}}
-            </div>
 
             <div class="settings_links-wrapper">
               <div class="settings_link-wrapper">
-                {{{LinkButton
-                  text="Сохранить данные"
-                  onClick=onSaveClick
-                }}}
+                  {{#if isEditMode}}
+                    {{{LinkButton
+                      text="Сохранить данные"
+                      onClick=onSaveClick
+                    }}}
+                  {{else}}
+                    {{{LinkButton
+                      text="Изменить данные"
+                      onClick=onEditClick
+                    }}}
+                  {{/if}}
+
               </div>
               <div class="settings_link-wrapper">
                 {{{LinkButton
                   text="Изменить пароль"
+                  onClick=onChangePasswordClick
                 }}}
               </div>
-              {{{LinkButton
-                text="Войти"
-                isRed=true
-              }}}
+                <div class="settings_link-wrapper">
+                {{{LinkButton
+                  text="Изменить аватар"
+                  onClick=onChangeUserpicClick
+                }}}
+                </div>
             </div>
-
           </div>
         </div>
       </main>
@@ -267,4 +324,4 @@ class SettingsPage extends Block {
   }
 }
 
-export default SettingsPage
+export default withStore(withRouter(SettingsPage))

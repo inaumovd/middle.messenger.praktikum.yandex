@@ -1,4 +1,4 @@
-import { renderDOM, registerComponent } from './core'
+import { registerComponent } from './core'
 
 import './styles/styles.scss'
 
@@ -19,6 +19,8 @@ import {
   Button,
   Error,
   ControlledInput,
+  NavLinkButton,
+  ChatMessage,
 } from './components'
 
 import {
@@ -29,7 +31,13 @@ import {
   RegisterPage,
   SettingsPage,
   NavPage,
+  ChangePassword,
+  ChangeUserpic,
 } from './pages'
+
+import Router from './core/Router'
+import { Store } from './core/store'
+import { AuthApi } from './services/auth'
 
 registerComponent(LinkButton)
 registerComponent(BackBar)
@@ -47,52 +55,59 @@ registerComponent(Input)
 registerComponent(Button)
 registerComponent(Error)
 registerComponent(ControlledInput)
+registerComponent(NavLinkButton)
+registerComponent(ChatMessage)
 
-// Временный роутер
-const getPage = () => {
-  const currentRoute = window.location.href
-    .toString()
-    .split(window.location.host)[1]
+document.addEventListener('DOMContentLoaded', () => {
+  const router = new Router()
+
+  const store = new Store({ chatsList: null })
+  const authApi = new AuthApi()
+  authApi.userInfo()
+  window.store = store
 
   const routes = [
     {
       path: '/login',
-      page: LoginPage,
+      block: LoginPage,
     },
     {
-      path: '/register',
-      page: RegisterPage,
+      path: '/sign-up',
+      block: RegisterPage,
     },
     {
-      path: '/chat',
-      page: ChatPage,
+      path: '/messenger',
+      block: ChatPage,
     },
     {
       path: '/settings',
-      page: SettingsPage,
+      block: SettingsPage,
     },
     {
       path: '/404',
-      page: Page404,
+      block: Page404,
     },
     {
       path: '/500',
-      page: Page500,
+      block: Page500,
+    },
+    {
+      path: '/',
+      block: NavPage,
+    },
+    {
+      path: '/change-password',
+      block: ChangePassword,
+    },
+    {
+      path: '/change-userpic',
+      block: ChangeUserpic,
     },
   ]
-  let currentPage = NavPage
 
   routes.forEach((route) => {
-    if (route.path === currentRoute) {
-      // @ts-ignore
-      currentPage = route.page
-    }
+    router.use(route.path, route.block)
   })
 
-  return currentPage
-}
-const Page = getPage()
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderDOM(new Page())
+  router.start()
 })

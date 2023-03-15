@@ -48,9 +48,25 @@
   width: 50%;
 }
 
+.settings_items-wrapper {
+  width: 50%;
+  margin-bottom: 40px;
+}
+
 .settings_link-wrapper {
   padding-bottom: 10px;
   padding-top: 5px;
   border-bottom: 1px solid var(--color-border-grey);
   width: 100%;
+}
+
+.settings-item {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--color-main-blue);
+  padding-bottom: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

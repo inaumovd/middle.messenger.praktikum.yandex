@@ -1,18 +1,21 @@
 import Block from 'core/Block'
 
 import './chat.scss'
+import { withStore } from '../../utils/withStore'
+import { AuthApi } from '../../services/auth'
+import { ChatApi } from '../../services/chat'
 
 class ChatPage extends Block {
-  constructor() {
-    super()
+  public messages: any
+  private authApi: AuthApi
+  private chatApi: ChatApi
+  constructor(props) {
+    super(props)
 
-    this.setProps({
-      onButtonClick: () => this.onButtonClick(),
-    })
-  }
-
-  onButtonClick() {
-    console.log('123')
+    this.authApi = new AuthApi()
+    this.chatApi = new ChatApi()
+    this.authApi.userInfo()
+    this.chatApi.getChats()
   }
 
   render() {
@@ -20,7 +23,8 @@ class ChatPage extends Block {
     return `
       <main class="main">
         <div class="chat-page">
-          {{{ChatSidebar}}}
+          {{{ChatSidebar
+          }}}
           {{{ChatMain}}}
         </div>
       </main>
@@ -28,4 +32,4 @@ class ChatPage extends Block {
   }
 }
 
-export default ChatPage
+export default withStore(ChatPage)

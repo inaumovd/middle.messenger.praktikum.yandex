@@ -37,8 +37,7 @@ import {
 
 import Router from './core/Router'
 import { Store } from './core/store'
-import { HTTPTransport } from './core/api'
-import { getMeApiCall } from './services/apiCalls'
+import { AuthApi } from './services/auth'
 
 registerComponent(LinkButton)
 registerComponent(BackBar)
@@ -63,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const router = new Router()
 
   const store = new Store({ chatsList: null })
+  const authApi = new AuthApi()
+  authApi.userInfo()
   window.store = store
 
   const routes = [
@@ -109,8 +110,4 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   router.start()
-
-  getMeApiCall((payload) => {
-    window.store.dispatch({ user: payload })
-  })
 })

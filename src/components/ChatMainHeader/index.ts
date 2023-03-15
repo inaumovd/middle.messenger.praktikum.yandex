@@ -1,12 +1,12 @@
 import Block from 'core/Block'
 
 import './chatMainHeader.scss'
-import { HTTPTransport } from '../../core/api'
 import { withStore } from '../../utils/withStore'
-import { onAddUserApiCall, onDeleteUserApiCall } from '../../services/apiCalls'
+import { ChatApi } from '../../services/chat'
 
 class ChatMainHeader extends Block {
   static componentName = 'ChatMainHeader'
+  private chatApi: ChatApi
   constructor(props) {
     super(props)
 
@@ -19,6 +19,8 @@ class ChatMainHeader extends Block {
       deleteUserId: '',
       addUserId: '',
     })
+
+    this.chatApi = new ChatApi()
   }
 
   onDeleteUserInput(e: InputEvent) {
@@ -38,13 +40,10 @@ class ChatMainHeader extends Block {
       .getContent()
       .querySelector('input[name="addUserId"]') as HTMLInputElement
 
-    onAddUserApiCall({
-      data: {
-        users: [Number(addUserIdEl.value)],
-        chatId: this.props.store.getState().currentChat,
-      },
-      headers: { 'content-type': 'application/json' },
-    })
+    this.chatApi.addUser(
+      Number(addUserIdEl.value),
+      this.props.store.getState().currentChat,
+    )
   }
 
   onDeleteUserClick() {
@@ -52,13 +51,10 @@ class ChatMainHeader extends Block {
       .getContent()
       .querySelector('input[name="deleteUserId"]') as HTMLInputElement
 
-    onDeleteUserApiCall({
-      data: {
-        users: [Number(deleteUserIdEl.value)],
-        chatId: this.props.store.getState().currentChat,
-      },
-      headers: { 'content-type': 'application/json' },
-    })
+    this.chatApi.deleteUser(
+      Number(deleteUserIdEl.value),
+      this?.props?.store?.getState()?.currentChat,
+    )
   }
 
   protected render(): string {

@@ -1,4 +1,12 @@
 import EventBus from './EventBus'
+import { Chat, User, Message } from '../types'
+
+export type AppState = {
+  user: User | null
+  chatsList: Array<Chat> | null
+  currentChat: number | null
+  messages: Array<Message>
+}
 
 export type Dispatch<State> = (
   nextStateOrAction: Partial<State> | Action<State>,
@@ -14,7 +22,7 @@ export type Action<State> = (
 export class Store<State extends Record<string, any>> extends EventBus {
   private state: State = {} as State
 
-  private static __instance: Store<any>
+  private static __instance: Store<AppState>
 
   constructor(defaultState?: State) {
     super()

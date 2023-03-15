@@ -2,16 +2,20 @@ import Block from 'core/Block'
 
 import './chat.scss'
 import { withStore } from '../../utils/withStore'
-import { getChatsApiCall } from '../../services/apiCalls'
+import { AuthApi } from '../../services/auth'
+import { ChatApi } from '../../services/chat'
 
 class ChatPage extends Block {
   public messages: any
+  private authApi: AuthApi
+  private chatApi: ChatApi
   constructor(props) {
     super(props)
 
-    getChatsApiCall((payload) => {
-      this.props.store.dispatch({ chatsList: payload })
-    })
+    this.authApi = new AuthApi()
+    this.chatApi = new ChatApi()
+    this.authApi.userInfo()
+    this.chatApi.getChats()
   }
 
   render() {

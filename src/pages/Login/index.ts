@@ -2,11 +2,11 @@ import Block from 'core/Block'
 import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 
 import './login.scss'
-import { HTTPTransport } from '../../core/api'
 import { withRouter } from '../../utils/withRouter'
-import { onSignInApiCall } from '../../services/apiCalls'
+import { AuthApi } from '../../services/auth'
 
 class LoginPage extends Block {
+  private authApi: AuthApi
   constructor(props) {
     super(props)
 
@@ -18,6 +18,8 @@ class LoginPage extends Block {
       emailValue: '',
       passwordValue: '',
     })
+
+    this.authApi = new AuthApi()
   }
 
   onFocus(e: FocusEvent) {
@@ -60,18 +62,7 @@ class LoginPage extends Block {
       { type: ValidateRuleType.Password, value: passwordEl.value },
     ])
 
-    onSignInApiCall(
-      {
-        data: {
-          login: emailEl.value,
-          password: passwordEl.value,
-        },
-        headers: { 'content-type': 'application/json' },
-      },
-      () => {
-        this.props.router.go('/messenger')
-      },
-    )
+    this.authApi.signIn({ password: passwordEl.value, login: emailEl.value })
   }
 
   onInput(e: InputEvent) {

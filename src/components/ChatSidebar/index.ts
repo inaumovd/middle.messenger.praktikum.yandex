@@ -2,51 +2,49 @@ import Block from 'core/Block'
 
 import './chatSidebar.scss'
 import { withRouter } from '../../utils/withRouter'
-import { HTTPTransport } from '../../core/api'
 import { withStore } from '../../utils/withStore'
-import { Store } from '../../core/store'
+import { AppState, Store } from '../../core/store'
 import Router from '../../core/Router'
-import {
-  getChatsApiCall,
-  onLogoutApiCall,
-  onPostChatApiCall,
-} from '../../services/apiCalls'
+import { ChatApi } from '../../services/chat'
+import { AuthApi } from '../../services/auth'
 
 interface ChatSidebarProps {
-  store: Store<any>
+  store: Store<AppState>
   router: Router
 }
 
 class ChatSidebar extends Block<ChatSidebarProps> {
   static componentName = 'ChatSidebar'
+  private chatApi: ChatApi
+  private authApi: AuthApi
   constructor(props: ChatSidebarProps) {
     super(props)
 
     this.setProps({
       onExitClick: () => this.onExitClick(),
       onCreateChatClick: () => this.onCreateChatClick(),
+      onChatTitleInput: (e: InputEvent) => this.onChatTitleInput(e),
       chats: this.props.store.getState().chatsList,
     })
+
+    this.chatApi = new ChatApi()
+    this.authApi = new AuthApi()
   }
 
   onExitClick() {
-    onLogoutApiCall(() => {
-      this.props.router.go('/')
-    })
+    this.authApi.logOut()
   }
 
   onCreateChatClick() {
-    onPostChatApiCall(
-      {
-        data: { title: 'New chat' },
-        headers: { 'content-type': 'application/json' },
-      },
-      () => {
-        getChatsApiCall((payload) => {
-          this.props.store.dispatch({ chatsList: payload })
-        })
-      },
-    )
+    const chatTitle = this.refs.chatTitleInputRef
+      .getContent()
+      .querySelector('input[name="chatTitle"]') as HTMLInputElement
+
+    this.chatApi.createChat(chatTitle.value)
+  }
+
+  onChatTitleInput(e) {
+    console.log(e)
   }
 
   protected render(): string {
@@ -65,6 +63,13 @@ class ChatSidebar extends Block<ChatSidebarProps> {
             {{{Button
               onClick=onCreateChatClick
               text='Новый чат'
+            }}}
+            {{{ControlledInput
+              name="chatTitle"
+              placeholder="Chat title"
+              type="chatTitle"
+              onInput=onAddUserInput
+              ref="chatTitleInputRef"
             }}}
           </div>
         </div>

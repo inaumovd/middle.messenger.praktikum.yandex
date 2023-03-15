@@ -3,13 +3,19 @@ import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 
 import './settings.scss'
 import { withRouter } from '../../utils/withRouter'
-import { HTTPTransport } from '../../core/api'
-import { getMeApiCall, onPutUserProfileApiCall } from '../../services/apiCalls'
 import { withStore } from '../../utils/withStore'
+import { ProfileApi } from '../../services/profile'
+import { AuthApi } from '../../services/auth'
 
 class SettingsPage extends Block {
+  private profileApi: ProfileApi
+  private authApi: AuthApi
   constructor(props) {
     super(props)
+
+    this.authApi = new AuthApi()
+    this.profileApi = new ProfileApi()
+    this.authApi.userInfo()
 
     this.setProps({
       onEditClick: () => this.onEditClick(),
@@ -19,12 +25,7 @@ class SettingsPage extends Block {
       onFocus: (e: FocusEvent) => this.onFocus(e),
       onSaveClick: () => this.onSaveClick(),
       isEditMode: false,
-    })
-
-    getMeApiCall((payload) => {
-      this.setProps({
-        user: payload,
-      })
+      user: this?.props?.store.getState().user,
     })
   }
 
@@ -82,16 +83,13 @@ class SettingsPage extends Block {
       { type: ValidateRuleType.Phone, value: phoneEl.value },
     ])
 
-    onPutUserProfileApiCall({
-      data: {
-        first_name: firstNameEl.value,
-        second_name: lastNameEl.value,
-        display_name: displayNameEl.value,
-        login: loginEl.value,
-        email: emailEl.value,
-        phone: phoneEl.value,
-      },
-      headers: { 'content-type': 'application/json' },
+    this.profileApi.changeProfileInfo({
+      first_name: firstNameEl.value,
+      second_name: lastNameEl.value,
+      display_name: displayNameEl.value,
+      login: loginEl.value,
+      email: emailEl.value,
+      phone: phoneEl.value,
     })
 
     this.setProps({

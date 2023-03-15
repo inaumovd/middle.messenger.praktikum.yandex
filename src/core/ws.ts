@@ -1,10 +1,10 @@
-import { Store } from './store'
+import { AppState, Store } from './store'
 
 class SocketChat {
   public messages: any
   private socket: WebSocket | undefined
   private static _instance: SocketChat | undefined
-  private store: Store<any>
+  private store: Store<AppState>
   constructor() {
     if (SocketChat._instance) {
       return SocketChat._instance

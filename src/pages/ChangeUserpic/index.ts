@@ -2,11 +2,11 @@ import Block from 'core/Block'
 import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 
 import './login.scss'
-import { HTTPTransport } from '../../core/api'
 import { withRouter } from '../../utils/withRouter'
-import { onChangeAvatarApiCall } from '../../services/apiCalls'
+import { ProfileApi } from '../../services/profile'
 
 class ChangeUserpic extends Block {
+  private profileApi: ProfileApi
   constructor(props) {
     super(props)
 
@@ -18,6 +18,8 @@ class ChangeUserpic extends Block {
       oldPasswordValue: '',
       newPasswordValue: '',
     })
+
+    this.profileApi = new ProfileApi()
   }
 
   onFocus(e: FocusEvent) {
@@ -45,10 +47,7 @@ class ChangeUserpic extends Block {
     const avatar = document.getElementById('avatar')
     const form = new FormData(myUserForm)
 
-    onChangeAvatarApiCall({
-      data: form,
-      type: 'file',
-    })
+    this.profileApi.changeAvatar(form)
   }
 
   onInput(e: InputEvent) {

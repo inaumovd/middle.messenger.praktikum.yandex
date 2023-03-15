@@ -2,11 +2,11 @@ import Block from 'core/Block'
 import { validateForm, ValidateRuleType } from 'helpers/validateForm'
 
 import './login.scss'
-import { HTTPTransport } from '../../core/api'
 import { withRouter } from '../../utils/withRouter'
-import { onChangePasswordApiCall } from '../../services/apiCalls'
+import { ProfileApi } from '../../services/profile'
 
 class ChangePasswordPage extends Block {
+  private profileApi: ProfileApi
   constructor(props) {
     super(props)
 
@@ -18,6 +18,8 @@ class ChangePasswordPage extends Block {
       oldPasswordValue: '',
       newPasswordValue: '',
     })
+
+    this.profileApi = new ProfileApi()
   }
 
   onFocus(e: FocusEvent) {
@@ -54,12 +56,9 @@ class ChangePasswordPage extends Block {
       { type: ValidateRuleType.Password, value: newPasswordEl.value },
     ])
 
-    onChangePasswordApiCall({
-      data: {
-        oldPassword: oldPasswordEl.value,
-        newPassword: newPasswordEl.value,
-      },
-      headers: { 'content-type': 'application/json' },
+    this.profileApi.changePassword({
+      oldPassword: oldPasswordEl.value,
+      newPassword: newPasswordEl.value,
     })
   }
 

@@ -18,7 +18,16 @@ function queryStringify(data: any) {
 }
 
 export class HTTPTransport {
-  get = (url: string, options: { data?: any; timeout?: number } = {}) => {
+  get = (
+    url: string,
+    options: {
+      data?: any
+      timeout?: number
+      headers?: {
+        [key: string]: string
+      }
+    } = {},
+  ) => {
     let innerUrl = url
     if (options.data) {
       innerUrl = url + queryStringify(options.data)
@@ -33,7 +42,14 @@ export class HTTPTransport {
 
   put = (
     url: string,
-    options: { data?: any; timeout?: number; type?: string } = {},
+    options: {
+      data?: any
+      timeout?: number
+      type?: string
+      headers?: {
+        [key: string]: string
+      }
+    } = {},
   ) => {
     return this.request(
       url,
@@ -42,7 +58,16 @@ export class HTTPTransport {
     )
   }
 
-  post = (url: string, options: { data?: any; timeout?: number } = {}) => {
+  post = (
+    url: string,
+    options: {
+      data?: any
+      timeout?: number
+      headers?: {
+        [key: string]: string
+      }
+    } = {},
+  ) => {
     return this.request(
       url,
       { ...options, method: METHODS.POST },
@@ -50,10 +75,19 @@ export class HTTPTransport {
     )
   }
 
-  delete = (url: string, options: { data?: any; timeout?: number } = {}) => {
+  delete = (
+    url: string,
+    options: {
+      data?: any
+      timeout?: number
+      headers?: {
+        [key: string]: string
+      }
+    } = {},
+  ) => {
     return this.request(
       url,
-      { ...options, method: METHODS.PUT },
+      { ...options, method: METHODS.DELETE },
       options.timeout,
     )
   }
@@ -67,7 +101,6 @@ export class HTTPTransport {
 
       if (headers) {
         const headersArr = Object.entries(headers)
-        console.log(headersArr)
         headersArr.forEach((item) => {
           xhr.setRequestHeader(item[0], item[1])
         })

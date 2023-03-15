@@ -1,17 +1,19 @@
 import Block from 'core/Block'
 
 import './register.scss'
-import { HTTPTransport } from '../../core/api'
 import { withRouter } from '../../utils/withRouter'
-import { onSignUpApiCall } from '../../services/apiCalls'
+import { AuthApi } from '../../services/auth'
 
 class RegisterPage extends Block {
+  private authApi: AuthApi
   constructor(props) {
     super(props)
 
     this.setProps({
       onSubmit: () => this.onSubmit(),
     })
+
+    this.authApi = new AuthApi()
   }
 
   onSubmit() {
@@ -49,22 +51,14 @@ class RegisterPage extends Block {
       })
     }
 
-    onSignUpApiCall(
-      {
-        data: {
-          first_name: firstNameEl.value,
-          second_name: lastNameEl.value,
-          login: loginlEl.value,
-          email: emailEl.value,
-          password: passwordEl.value,
-          phone: phoneEl.value,
-        },
-        headers: { 'content-type': 'application/json' },
-      },
-      () => {
-        this.props.router.go('/messenger')
-      },
-    )
+    this.authApi.signUp({
+      first_name: firstNameEl.value,
+      second_name: lastNameEl.value,
+      login: loginlEl.value,
+      email: emailEl.value,
+      password: passwordEl.value,
+      phone: phoneEl.value,
+    })
   }
 
   render() {
